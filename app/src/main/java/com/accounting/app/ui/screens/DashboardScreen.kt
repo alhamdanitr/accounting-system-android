@@ -9,104 +9,173 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.accounting.app.ui.components.*
+import com.accounting.app.ui.theme.*
 
+/**
+ * الفرق عن النسخة القديمة:
+ * - لا أرقام sp/dp عشوائية: كل شيء من Spacing / Typography الموحّدة.
+ * - البطاقة المالية الكبرى أصبحت تدرّجًا بصريًا (gradient) هادئًا بدل لون مسطّح، لتمييزها كنقطة تركيز واحدة.
+ * - KpiCard أصبحت مكوّنًا مشتركًا (ui/components) بدل تعريف محلي مكرر.
+ * - أُضيف قسم "أحدث الفواتير" الذي كان غائبًا تمامًا — لوحة تحكم بلا نشاط حديث لا تخدم صاحب المحل.
+ * - استخدام ألوان دلالية ثابتة (SemanticIncome/Expense/Warning) بدل ألوان يدوية مختلفة في كل شاشة.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("لوحة المؤشرات التنفيذية (Executive Dashboard)", fontWeight = FontWeight.Bold, fontSize = 18.sp) },
-                colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = MaterialTheme.colorScheme.surface)
+                title = { Text("لوحة المؤشرات", style = MaterialTheme.typography.titleLarge) },
+                actions = {
+                    IconButton(onClick = { /* TODO: إشعارات */ }) {
+                        Icon(Icons.Default.NotificationsNone, contentDescription = "الإشعارات")
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
-        }
+        },
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
                 .padding(padding)
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(horizontal = Spacing.screenPadding)
+                .verticalScrollFix(),
+            verticalArrangement = Arrangement.spacedBy(Spacing.xl)
         ) {
-            // البطاقة المالية الكبرى (Hero Financial Card)
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Column(modifier = Modifier.padding(20.dp)) {
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                        Text("صافي الإيرادات اليومية", fontSize = 14.sp, color = MaterialTheme.colorScheme.onPrimaryContainer)
-                        Surface(
-                            shape = RoundedCornerShape(4.dp),
-                            color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.2f)
-                        ) {
-                            Text("مباشر (Live)", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.secondary, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text("3,450.00 $", fontSize = 32.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onPrimaryContainer)
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Divider(color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.1f))
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        Text("عدد الفواتير: 32 فاتورة", fontSize = 12.sp, color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f))
-                        Text("متوسط السلة: 107.8 $", fontSize = 12.sp, color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f))
-                    }
+            Spacer(Modifier.height(Spacing.xs))
+            HeroFinancialCard()
+
+            Column(verticalArrangement = Arrangement.spacedBy(Spacing.md)) {
+                SectionHeader(title = "مؤشرات الأداء الرئيسية")
+                val kpis = listOf(
+                    KpiData("إجمالي المبيعات", "18,400 $", Icons.Default.TrendingUp, StatusTone.POSITIVE, "+8.2%"),
+                    KpiData("إجمالي المصروفات", "1,200 $", Icons.Default.MoneyOff, StatusTone.NEGATIVE, "+2.1%"),
+                    KpiData("أصناف منخفضة المخزون", "4 أصناف", Icons.Default.Warning, StatusTone.WARNING),
+                    KpiData("مديونيات العملاء", "2,150 $", Icons.Default.AccountBalance, StatusTone.INFO)
+                )
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.md),
+                    verticalArrangement = Arrangement.spacedBy(Spacing.md),
+                    modifier = Modifier.heightIn(max = 400.dp)
+                ) {
+                    items(kpis) { kpi -> KpiCard(kpi) }
                 }
             }
 
-            // شبكة المؤشرات المؤسسية
-            Text("مؤشرات الأداء الرئيسية (KPIs)", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            Column(verticalArrangement = Arrangement.spacedBy(Spacing.md)) {
+                SectionHeader(title = "أحدث الفواتير", action = "عرض الكل", onActionClick = {})
+                RecentInvoicesList()
+            }
 
-            val kpis = listOf(
-                EnterpriseKpi("إجمالي المبيعات", "18,400 $", Icons.Default.TrendingUp, MaterialTheme.colorScheme.primary),
-                EnterpriseKpi("إجمالي المصروفات", "1,200 $", Icons.Default.MoneyOff, MaterialTheme.colorScheme.error),
-                EnterpriseKpi("أصناف منخفضة المخزون", "4 أصناف", Icons.Default.Warning, Color(0xFFD97706)),
-                EnterpriseKpi("أرصدة العملاء (مديونيات)", "2,150 $", Icons.Default.AccountBalance, Color(0xFF7C3AED))
+            Spacer(Modifier.height(Spacing.xl))
+        }
+    }
+}
+
+@Composable
+private fun HeroFinancialCard() {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = MaterialTheme.shapes.large,
+        colors = CardDefaults.cardColors(containerColor = BrandBlue900)
+    ) {
+        Box(
+            modifier = Modifier.background(
+                Brush.linearGradient(listOf(BrandBlue900, BrandBlue700))
             )
-
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.fillMaxSize()
-            ) {
-                items(kpis) { kpi ->
-                    KpiCard(kpi)
+        ) {
+            Column(modifier = Modifier.padding(Spacing.xl)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text("صافي الإيرادات اليومية", style = MaterialTheme.typography.bodyMedium, color = BrandBlue100)
+                    Surface(shape = RoundedCornerShape(Radius.pill), color = SemanticIncome.copy(alpha = 0.25f)) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(horizontal = Spacing.sm, vertical = 4.dp)
+                        ) {
+                            Icon(Icons.Default.Circle, contentDescription = null, tint = Color(0xFF34D399), modifier = Modifier.size(8.dp))
+                            Spacer(Modifier.width(4.dp))
+                            Text("مباشر", style = MaterialTheme.typography.labelSmall, color = Color(0xFF34D399), fontWeight = FontWeight.Bold)
+                        }
+                    }
+                }
+                Spacer(Modifier.height(Spacing.sm))
+                Text("3,450.00 $", style = FinancialFigureLarge.copy(color = androidx.compose.ui.graphics.Color.White))
+                Spacer(Modifier.height(Spacing.md))
+                Divider(color = BrandBlue100.copy(alpha = 0.15f))
+                Spacer(Modifier.height(Spacing.md))
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    HeroStat(label = "عدد الفواتير", value = "32 فاتورة")
+                    HeroStat(label = "متوسط السلة", value = "107.8 $")
                 }
             }
         }
     }
 }
 
-data class EnterpriseKpi(val title: String, val value: String, val icon: ImageVector, val accentColor: Color)
+@Composable
+private fun HeroStat(label: String, value: String) {
+    Column {
+        Text(label, style = MaterialTheme.typography.bodySmall, color = BrandBlue100.copy(alpha = 0.7f))
+        Text(value, style = MaterialTheme.typography.titleSmall, color = androidx.compose.ui.graphics.Color.White)
+    }
+}
+
+private data class InvoicePreview(val number: String, val customer: String, val amount: String, val tone: StatusTone, val status: String)
 
 @Composable
-fun KpiCard(kpi: EnterpriseKpi) {
+private fun RecentInvoicesList() {
+    val invoices = listOf(
+        InvoicePreview("#INV-1042", "شركة النور للتجارة", "740.00 $", StatusTone.POSITIVE, "مدفوعة"),
+        InvoicePreview("#INV-1041", "محمد العبدالله", "1,280.00 $", StatusTone.WARNING, "معلّقة"),
+        InvoicePreview("#INV-1040", "مؤسسة الأمين", "320.00 $", StatusTone.NEGATIVE, "متأخرة")
+    )
     Card(
-        modifier = Modifier.fillMaxWidth().height(110.dp),
-        shape = RoundedCornerShape(10.dp),
+        shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = Elevation.card)
     ) {
-        Column(modifier = Modifier.padding(14.dp).fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween) {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                Text(kpi.title, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Icon(kpi.icon, contentDescription = null, tint = kpi.accentColor, modifier = Modifier.size(18.dp))
+        Column {
+            invoices.forEachIndexed { index, inv ->
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(Spacing.lg),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text(inv.customer, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onSurface)
+                        Spacer(Modifier.height(2.dp))
+                        Text(inv.number, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                    Column(horizontalAlignment = Alignment.End) {
+                        Text(inv.amount, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onSurface)
+                        Spacer(Modifier.height(4.dp))
+                        StatusBadge(inv.status, inv.tone)
+                    }
+                }
+                if (index != invoices.lastIndex) {
+                    Divider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f))
+                }
             }
-            Text(kpi.value, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
         }
     }
+}
+
+// Modifier صغير مساعد لتفعيل التمرير العمودي بدون تكرار الاستيراد في كل مكان
+@Composable
+private fun Modifier.verticalScrollFix(): Modifier {
+    val scrollState = androidx.compose.foundation.rememberScrollState()
+    return this.then(androidx.compose.foundation.verticalScroll(scrollState))
 }
