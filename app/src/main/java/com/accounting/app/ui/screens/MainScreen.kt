@@ -3,56 +3,58 @@ package com.accounting.app.ui.screens
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBalance
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
-    var selectedTab by remember { mutableIntStateOf(0) }
-    
+    var selectedItem by remember { mutableStateOf(0) }
+
+    val items = listOf(
+        NavigationItem("الرئيسية", Icons.Default.Dashboard),
+        NavigationItem("نقطة البيع", Icons.Default.PointOfSale),
+        NavigationItem("المخازن", Icons.Default.Inventory),
+        NavigationItem("العملاء", Icons.Default.People),
+        NavigationItem("السندات", Icons.Default.Receipt),
+        NavigationItem("التحويلات", Icons.Default.SwapHoriz),
+        NavigationItem("التقارير", Icons.Default.Assessment),
+        NavigationItem("الإعدادات", Icons.Default.Settings)
+    )
+
     Scaffold(
         bottomBar = {
-            NavigationBar {
-                NavigationBarItem(
-                    selected = selectedTab == 0,
-                    onClick = { selectedTab = 0 },
-                    icon = { Icon(Icons.Default.Home, contentDescription = "الرئيسية") },
-                    label = { Text("الرئيسية") }
-                )
-                NavigationBarItem(
-                    selected = selectedTab == 1,
-                    onClick = { selectedTab = 1 },
-                    icon = { Icon(Icons.Default.ShoppingCart, contentDescription = "نقطة البيع") },
-                    label = { Text("البيع (POS)") }
-                )
-                NavigationBarItem(
-                    selected = selectedTab == 2,
-                    onClick = { selectedTab = 2 },
-                    icon = { Icon(Icons.Default.List, contentDescription = "المخزون") },
-                    label = { Text("المخزون") }
-                )
-                NavigationBarItem(
-                    selected = selectedTab == 3,
-                    onClick = { selectedTab = 3 },
-                    icon = { Icon(Icons.Default.AccountBalance, contentDescription = "المحاسبة") },
-                    label = { Text("المحاسبة") }
-                )
+            NavigationBar(
+                containerColor = MaterialTheme.colorScheme.surface,
+                tonalElevation = 8.dp
+            ) {
+                items.forEachIndexed { index, item ->
+                    NavigationBarItem(
+                        icon = { Icon(item.icon, contentDescription = item.title) },
+                        label = { Text(item.title, style = MaterialTheme.typography.labelSmall) },
+                        selected = selectedItem == index,
+                        onClick = { selectedItem = index }
+                    )
+                }
             }
         }
     ) { padding ->
         Box(modifier = Modifier.padding(padding)) {
-            when (selectedTab) {
+            when (selectedItem) {
                 0 -> DashboardScreen()
                 1 -> POSScreen()
                 2 -> InventoryScreen()
-                3 -> AccountingScreen()
+                3 -> CustomersSuppliersScreen()
+                4 -> VouchersScreen()
+                5 -> StockTransferScreen()
+                6 -> ReportsScreen()
+                7 -> SettingsScreen()
             }
         }
     }
 }
+
+data class NavigationItem(val title: String, val icon: ImageVector)
