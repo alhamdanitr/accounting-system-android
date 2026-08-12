@@ -1,7 +1,6 @@
 package com.accounting.app.ui.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,17 +15,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
-import androidx.compose.material3.FilterChip
 import com.accounting.app.data.remote.NetworkModule
 import com.accounting.app.data.settings.AppConfig
 import com.accounting.app.domain.model.Product
@@ -42,7 +34,6 @@ fun POSScreen() {
     var cartItems by remember { mutableStateOf(listOf<Pair<Product, Int>>()) }
     var searchQuery by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf("الكل") }
-    var isSubmitting by remember { mutableStateOf(false) }
     var orderSuccess by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
@@ -73,9 +64,7 @@ fun POSScreen() {
     val grandTotal = subtotal + taxTotal
 
     Row(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        // القسم الأيمن: محطة اختيار المنتجات (65%)
         Column(modifier = Modifier.weight(0.65f).fillMaxHeight().padding(16.dp)) {
-            // شريط العنوان والبحث الاحترافي
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                 Column {
                     Text("محطة نقطة البيع (POS Terminal)", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
@@ -92,30 +81,19 @@ fun POSScreen() {
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("بحث متقدم بالاسم أو الباركود أو رقم SKU...") },
+                placeholder = { Text("بحث بالاسم أو الباركود...") },
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
-                trailingIcon = {
-                    if (searchQuery.isNotEmpty()) {
-                        IconButton(onClick = { searchQuery = "" }) { Icon(Icons.Default.Clear, contentDescription = null) }
-                    }
-                },
-                shape = RoundedCornerShape(8.dp),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedBorderColor = MaterialTheme.colorScheme.outline
-                )
+                shape = RoundedCornerShape(8.dp)
             )
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // شريط فلاتر الفئات (Categories Bar)
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 categories.forEach { cat ->
                     FilterChip(
                         selected = selectedCategory == cat,
                         onClick = { selectedCategory = cat },
-                        label = { Text(cat, fontSize = 12.sp) },
-                        shape = RoundedCornerShape(6.dp)
+                        label = { Text(cat, fontSize = 12.sp) }
                     )
                 }
             }
@@ -125,10 +103,6 @@ fun POSScreen() {
             if (errorMessage != null) {
                 Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer)) {
                     Text(errorMessage!!, color = MaterialTheme.colorScheme.onErrorContainer, modifier = Modifier.padding(16.dp))
-                }
-            } else if (filteredProducts.isEmpty() && !isLoading) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text("لا توجد أصناف مطابقة للبحث", color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             } else {
                 LazyVerticalGrid(
@@ -150,7 +124,6 @@ fun POSScreen() {
             }
         }
 
-        // القسم الأيسر: سلة الفاتورة والملخص المالي (35%)
         Surface(
             modifier = Modifier.weight(0.35f).fillMaxHeight(),
             color = MaterialTheme.colorScheme.surface,
@@ -158,66 +131,43 @@ fun POSScreen() {
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                    Text("سلة الفاتورة الحالية", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                    Text("سلة الفاتورة", fontWeight = FontWeight.Bold, fontSize = 18.sp)
                     IconButton(onClick = { cartItems = emptyList() }) {
-                        Icon(Icons.Default.DeleteSweep, contentDescription = "إفراغ السلة", tint = MaterialTheme.colorScheme.error)
+                        Icon(Icons.Default.Delete, contentDescription = "إفراغ السلة", tint = MaterialTheme.colorScheme.error)
                     }
                 }
 
                 Divider(modifier = Modifier.padding(vertical = 8.dp))
 
-                if (cartItems.isEmpty()) {
-                    Box(modifier = Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(Icons.Default.ShoppingCartCheckout, contentDescription = null, modifier = Modifier.size(48.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f))
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Text("السلة فارغة. اختر أصنافاً للبيع.", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
-                        }
-                    }
-                } else {
-                    LazyColumn(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        items(cartItems) { (product, qty) ->
-                            TerminalCartRow(product, qty,
-                                onIncrease = {
-                                    cartItems = cartItems.map { if (it.first.id == product.id) it.first to (it.second + 1) else it }
-                                },
-                                onDecrease = {
-                                    cartItems = if (qty > 1) {
-                                        cartItems.map { if (it.first.id == product.id) it.first to (it.second - 1) else it }
-                                    } else {
-                                        cartItems.filter { it.first.id != product.id }
-                                    }
+                LazyColumn(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    items(cartItems) { (product, qty) ->
+                        TerminalCartRow(product, qty,
+                            onIncrease = { cartItems = cartItems.map { if (it.first.id == product.id) it.first to (it.second + 1) else it } },
+                            onDecrease = {
+                                cartItems = if (qty > 1) {
+                                    cartItems.map { if (it.first.id == product.id) it.first to (it.second - 1) else it }
+                                } else {
+                                    cartItems.filter { it.first.id != product.id }
                                 }
-                            )
-                        }
+                            }
+                        )
                     }
                 }
 
                 Divider(modifier = Modifier.padding(vertical = 12.dp))
 
-                // الملخص المالي المؤسسي
                 FinancialRow("المجموع الفرعي:", "%.2f $".format(subtotal))
-                FinancialRow("الضريبة (VAT):", "%.2f $".format(taxTotal))
+                FinancialRow("الضريبة:", "%.2f $".format(taxTotal))
                 Spacer(modifier = Modifier.height(8.dp))
-                FinancialRow("الإجمالي النهائي:", "%.2f $".format(grandTotal), isTotal = true)
+                FinancialRow("الإجمالي:", "%.2f $".format(grandTotal), isTotal = true)
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                if (orderSuccess) {
-                    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondary)) {
-                        Text("تم اعتماد الفاتورة وتحديث المخزون بنجاح!", color = Color.White, modifier = Modifier.padding(12.dp), fontWeight = FontWeight.Bold)
-                    }
-                    Spacer(modifier = Modifier.height(8.dp))
-                }
-
                 Button(
-                    onClick = {
-                        orderSuccess = true
-                        cartItems = emptyList()
-                    },
+                    onClick = { orderSuccess = true; cartItems = emptyList() },
                     modifier = Modifier.fillMaxWidth().height(54.dp),
                     shape = RoundedCornerShape(8.dp),
-                    enabled = cartItems.isNotEmpty() && !isSubmitting
+                    enabled = cartItems.isNotEmpty()
                 ) {
                     Icon(Icons.Default.Print, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
@@ -274,7 +224,7 @@ fun TerminalCartRow(product: Product, qty: Int, onIncrease: () -> Unit, onDecrea
 @Composable
 fun FinancialRow(label: String, value: String, isTotal: Boolean = false) {
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-        Text(label, fontSize = if (isTotal) 16.sp else 14.sp, fontWeight = if (isTotal) FontWeight.Bold else FontWeight.Normal, color = if (isTotal) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(label, fontSize = if (isTotal) 16.sp else 14.sp, fontWeight = if (isTotal) FontWeight.Bold else FontWeight.Normal)
         Text(value, fontSize = if (isTotal) 18.sp else 14.sp, fontWeight = FontWeight.Bold, color = if (isTotal) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface)
     }
 }
