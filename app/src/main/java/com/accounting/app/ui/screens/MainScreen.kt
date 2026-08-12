@@ -1,7 +1,5 @@
 package com.accounting.app.ui.screens
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -40,7 +38,6 @@ private enum class PrimaryDestination(val label: String, val icon: ImageVector) 
 private data class MoreItem(val label: String, val icon: ImageVector, val destination: String)
 
 private val moreItems = listOf(
-    MoreItem("قائمة المنتجات", Icons.Default.Inventory, "products"),
     MoreItem("السندات", Icons.Default.Receipt, "vouchers"),
     MoreItem("التحويلات المخزنية", Icons.Default.SwapHoriz, "transfer"),
     MoreItem("المحاسبة", Icons.Default.AccountBalanceWallet, "accounting"),
@@ -82,7 +79,6 @@ fun MainScreen() {
     ) { padding ->
         Box(modifier = Modifier.padding(padding)) {
             when (openSecondary) {
-                "products" -> ProductListScreen()
                 "vouchers" -> VouchersScreen()
                 "transfer" -> StockTransferScreen()
                 "accounting" -> AccountingScreen()
