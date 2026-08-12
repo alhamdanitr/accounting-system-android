@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import com.accounting.app.data.remote.NetworkModule
 import com.accounting.app.data.settings.AppConfig
 import com.accounting.app.domain.model.Product
