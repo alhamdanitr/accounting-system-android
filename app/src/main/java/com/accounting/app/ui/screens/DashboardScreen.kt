@@ -1,6 +1,7 @@
 package com.accounting.app.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -13,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
 import com.accounting.app.ui.components.*
 import com.accounting.app.ui.theme.*
@@ -37,7 +40,7 @@ fun DashboardScreen() {
                         Icon(Icons.Default.NotificationsNone, contentDescription = "الإشعارات")
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
         },
         containerColor = MaterialTheme.colorScheme.background
@@ -114,7 +117,7 @@ private fun HeroFinancialCard() {
                 Spacer(Modifier.height(Spacing.sm))
                 Text("3,450.00 $", style = FinancialFigureLarge.copy(color = androidx.compose.ui.graphics.Color.White))
                 Spacer(Modifier.height(Spacing.md))
-                Divider(color = BrandBlue100.copy(alpha = 0.15f))
+                HorizontalDivider(color = BrandBlue100.copy(alpha = 0.15f))
                 Spacer(Modifier.height(Spacing.md))
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     HeroStat(label = "عدد الفواتير", value = "32 فاتورة")
@@ -150,7 +153,7 @@ private fun RecentInvoicesList() {
         Column {
             invoices.forEachIndexed { index, inv ->
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(Spacing.lg),
+                    modifier = Modifier.fillMaxWidth().clickable { }.padding(Spacing.lg),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -166,7 +169,7 @@ private fun RecentInvoicesList() {
                     }
                 }
                 if (index != invoices.lastIndex) {
-                    Divider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f))
+                    HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f))
                 }
             }
         }
