@@ -3,10 +3,10 @@ package com.accounting.app.ui.screens
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
-    var selectedTab by remember { mutableStateOf(0) }
+    var selectedTab by remember { mutableIntStateOf(0) }
     
     Scaffold(
         bottomBar = {
@@ -29,7 +29,7 @@ fun MainScreen() {
                     selected = selectedTab == 1,
                     onClick = { selectedTab = 1 },
                     icon = { Icon(Icons.Default.ShoppingCart, contentDescription = "نقطة البيع") },
-                    label = { Text("البيع") }
+                    label = { Text("البيع (POS)") }
                 )
                 NavigationBarItem(
                     selected = selectedTab == 2,
@@ -40,7 +40,7 @@ fun MainScreen() {
                 NavigationBarItem(
                     selected = selectedTab == 3,
                     onClick = { selectedTab = 3 },
-                    icon = { Icon(Icons.Default.Star, contentDescription = "المحاسبة") },
+                    icon = { Icon(Icons.Default.AccountBalance, contentDescription = "المحاسبة") },
                     label = { Text("المحاسبة") }
                 )
             }
