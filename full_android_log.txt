@@ -1,0 +1,588 @@
+build	Set up job	﻿2026-08-12T01:49:00.8937342Z Current runner version: '2.336.0'
+build	Set up job	2026-08-12T01:49:00.8976055Z ##[group]Runner Image Provisioner
+build	Set up job	2026-08-12T01:49:00.8977597Z Hosted Compute Agent
+build	Set up job	2026-08-12T01:49:00.8978563Z Version: 20260707.563
+build	Set up job	2026-08-12T01:49:00.8979656Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+build	Set up job	2026-08-12T01:49:00.8980918Z Build Date: 2026-07-07T19:33:50Z
+build	Set up job	2026-08-12T01:49:00.8982085Z Worker ID: {72c8a343-1a27-414c-aabb-7bc074dc06c9}
+build	Set up job	2026-08-12T01:49:00.8983357Z Azure Region: westus2
+build	Set up job	2026-08-12T01:49:00.8984325Z ##[endgroup]
+build	Set up job	2026-08-12T01:49:00.8987108Z ##[group]Operating System
+build	Set up job	2026-08-12T01:49:00.8988444Z Ubuntu
+build	Set up job	2026-08-12T01:49:00.8989352Z 24.04.4
+build	Set up job	2026-08-12T01:49:00.8990285Z LTS
+build	Set up job	2026-08-12T01:49:00.8991179Z ##[endgroup]
+build	Set up job	2026-08-12T01:49:00.8992109Z ##[group]Runner Image
+build	Set up job	2026-08-12T01:49:00.8993324Z Image: ubuntu-24.04
+build	Set up job	2026-08-12T01:49:00.8994396Z Version: 20260720.247.2
+build	Set up job	2026-08-12T01:49:00.8997884Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+build	Set up job	2026-08-12T01:49:00.9001003Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+build	Set up job	2026-08-12T01:49:00.9002923Z ##[endgroup]
+build	Set up job	2026-08-12T01:49:00.9005382Z ##[group]GITHUB_TOKEN Permissions
+build	Set up job	2026-08-12T01:49:00.9007980Z Contents: read
+build	Set up job	2026-08-12T01:49:00.9009063Z Metadata: read
+build	Set up job	2026-08-12T01:49:00.9010005Z Packages: read
+build	Set up job	2026-08-12T01:49:00.9011120Z ##[endgroup]
+build	Set up job	2026-08-12T01:49:00.9014243Z Secret source: Actions
+build	Set up job	2026-08-12T01:49:00.9016640Z Prepare workflow directory
+build	Set up job	2026-08-12T01:49:00.9524083Z Prepare all required actions
+build	Set up job	2026-08-12T01:49:00.9599112Z Getting action download info
+build	Set up job	2026-08-12T01:49:01.3544135Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+build	Set up job	2026-08-12T01:49:01.6697790Z Download action repository 'actions/setup-java@v4' (SHA:cf277c60eb25467037889841efdb72551f06f6c3)
+build	Set up job	2026-08-12T01:49:02.0245427Z Download action repository 'gradle/actions@v3' (SHA:d9c87d481d55275bb5441eef3fe0e46805f9ef70)
+build	Set up job	2026-08-12T01:49:02.7796559Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+build	Set up job	2026-08-12T01:49:03.0575945Z Complete job name: build
+build	Run actions/checkout@v4	﻿2026-08-12T01:49:03.1514513Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1526336Z ##[group]Run actions/checkout@v4
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1527812Z with:
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1528935Z   repository: alhamdanitr/accounting-system-android
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1538148Z   token: ***
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1539181Z   ssh-strict: true
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1540238Z   ssh-user: git
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1541287Z   persist-credentials: true
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1542387Z   clean: true
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1543492Z   sparse-checkout-cone-mode: true
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1545041Z   fetch-depth: 1
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1546166Z   fetch-tags: false
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1547320Z   show-progress: true
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1548350Z   lfs: false
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1549354Z   submodules: false
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1550500Z   set-safe-directory: true
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1551616Z   allow-unsafe-pr-checkout: false
+build	Run actions/checkout@v4	2026-08-12T01:49:03.1553231Z ##[endgroup]
+build	Run actions/checkout@v4	2026-08-12T01:49:03.2814391Z Syncing repository: alhamdanitr/accounting-system-android
+build	Run actions/checkout@v4	2026-08-12T01:49:03.2824437Z ##[group]Getting Git version info
+build	Run actions/checkout@v4	2026-08-12T01:49:03.2827918Z Working directory is '/home/runner/work/accounting-system-android/accounting-system-android'
+build	Run actions/checkout@v4	2026-08-12T01:49:03.2832730Z [command]/usr/bin/git version
+build	Run actions/checkout@v4	2026-08-12T01:49:03.2919990Z git version 2.54.0
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3007578Z ##[endgroup]
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3020758Z Temporarily overriding HOME='/home/runner/work/_temp/78a33020-3a96-4a8b-853f-3e44389de5ba' before making global git config changes
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3026428Z Adding repository directory to the temporary git global config as a safe directory
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3032229Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/accounting-system-android/accounting-system-android
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3089292Z Deleting the contents of '/home/runner/work/accounting-system-android/accounting-system-android'
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3094366Z ##[group]Initializing the repository
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3111352Z [command]/usr/bin/git init /home/runner/work/accounting-system-android/accounting-system-android
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3216959Z hint: Using 'master' as the name for the initial branch. This default branch name
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3435299Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3456921Z hint: to use in all of your new repositories, which will suppress this warning,
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3477352Z hint: call:
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3478802Z hint:
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3480588Z hint: 	git config --global init.defaultBranch <name>
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3482811Z hint:
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3485400Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3488758Z hint: 'development'. The just-created branch can be renamed via this command:
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3491501Z hint:
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3492942Z hint: 	git branch -m <name>
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3494549Z hint:
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3497338Z hint: Disable this message with "git config set advice.defaultBranchName false"
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3501782Z Initialized empty Git repository in /home/runner/work/accounting-system-android/accounting-system-android/.git/
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3509042Z [command]/usr/bin/git remote add origin https://github.com/alhamdanitr/accounting-system-android
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3545644Z ##[endgroup]
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3548449Z ##[group]Disabling automatic garbage collection
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3550790Z [command]/usr/bin/git config --local gc.auto 0
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3561764Z ##[endgroup]
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3565198Z ##[group]Setting up auth
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3568270Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	Run actions/checkout@v4	2026-08-12T01:49:03.3577895Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	Run actions/checkout@v4	2026-08-12T01:49:03.4048109Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	Run actions/checkout@v4	2026-08-12T01:49:03.4110811Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	Run actions/checkout@v4	2026-08-12T01:49:03.4431113Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build	Run actions/checkout@v4	2026-08-12T01:49:03.4472233Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build	Run actions/checkout@v4	2026-08-12T01:49:03.4735189Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+build	Run actions/checkout@v4	2026-08-12T01:49:03.4779304Z ##[endgroup]
+build	Run actions/checkout@v4	2026-08-12T01:49:03.4782805Z ##[group]Fetching the repository
+build	Run actions/checkout@v4	2026-08-12T01:49:03.4795140Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +dec103682f0853650e67fc1a2322780a3928ec36:refs/remotes/origin/main
+build	Run actions/checkout@v4	2026-08-12T01:49:03.8000357Z From https://github.com/alhamdanitr/accounting-system-android
+build	Run actions/checkout@v4	2026-08-12T01:49:03.8003139Z  * [new ref]         dec103682f0853650e67fc1a2322780a3928ec36 -> origin/main
+build	Run actions/checkout@v4	2026-08-12T01:49:03.8037865Z ##[endgroup]
+build	Run actions/checkout@v4	2026-08-12T01:49:03.8039088Z ##[group]Determining the checkout info
+build	Run actions/checkout@v4	2026-08-12T01:49:03.8040946Z ##[endgroup]
+build	Run actions/checkout@v4	2026-08-12T01:49:03.8049779Z [command]/usr/bin/git sparse-checkout disable
+build	Run actions/checkout@v4	2026-08-12T01:49:03.8103128Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+build	Run actions/checkout@v4	2026-08-12T01:49:03.8144056Z ##[group]Checking out the ref
+build	Run actions/checkout@v4	2026-08-12T01:49:03.8145183Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+build	Run actions/checkout@v4	2026-08-12T01:49:03.8252904Z Switched to a new branch 'main'
+build	Run actions/checkout@v4	2026-08-12T01:49:03.8255900Z branch 'main' set up to track 'origin/main'.
+build	Run actions/checkout@v4	2026-08-12T01:49:03.8258888Z ##[endgroup]
+build	Run actions/checkout@v4	2026-08-12T01:49:03.8303381Z [command]/usr/bin/git log -1 --format=%H
+build	Run actions/checkout@v4	2026-08-12T01:49:03.8333874Z dec103682f0853650e67fc1a2322780a3928ec36
+build	set up JDK 17	﻿2026-08-12T01:49:03.8645408Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build	set up JDK 17	2026-08-12T01:49:03.8649066Z ##[group]Run actions/setup-java@v4
+build	set up JDK 17	2026-08-12T01:49:03.8649658Z with:
+build	set up JDK 17	2026-08-12T01:49:03.8650110Z   java-version: 17
+build	set up JDK 17	2026-08-12T01:49:03.8650597Z   distribution: temurin
+build	set up JDK 17	2026-08-12T01:49:03.8651091Z   java-package: jdk
+build	set up JDK 17	2026-08-12T01:49:03.8651610Z   check-latest: false
+build	set up JDK 17	2026-08-12T01:49:03.8652112Z   server-id: github
+build	set up JDK 17	2026-08-12T01:49:03.8652585Z   server-username: GITHUB_ACTOR
+build	set up JDK 17	2026-08-12T01:49:03.8653136Z   server-password: GITHUB_TOKEN
+build	set up JDK 17	2026-08-12T01:49:03.8653741Z   overwrite-settings: true
+build	set up JDK 17	2026-08-12T01:49:03.8654261Z   job-status: success
+build	set up JDK 17	2026-08-12T01:49:03.8660085Z   token: ***
+build	set up JDK 17	2026-08-12T01:49:03.8660642Z ##[endgroup]
+build	set up JDK 17	2026-08-12T01:49:04.0892196Z ##[warning]setup-java v4 is deprecated and will no longer receive updates. Please migrate to actions/setup-java@v5.
+build	set up JDK 17	2026-08-12T01:49:04.0906001Z ##[group]Installed distributions
+build	set up JDK 17	2026-08-12T01:49:04.0943712Z Resolved Java 17.0.19+10 from tool-cache
+build	set up JDK 17	2026-08-12T01:49:04.0945742Z Setting Java 17.0.19+10 as the default
+build	set up JDK 17	2026-08-12T01:49:04.0956572Z (node:2022) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+build	set up JDK 17	2026-08-12T01:49:04.0958705Z (Use `node --trace-deprecation ...` to show where the warning was created)
+build	set up JDK 17	2026-08-12T01:49:04.0961397Z Creating toolchains.xml for JDK version 17 from temurin
+build	set up JDK 17	2026-08-12T01:49:04.1043860Z Writing to /home/runner/.m2/toolchains.xml
+build	set up JDK 17	2026-08-12T01:49:04.1045193Z 
+build	set up JDK 17	2026-08-12T01:49:04.1046262Z Java configuration:
+build	set up JDK 17	2026-08-12T01:49:04.1047336Z   Distribution: temurin
+build	set up JDK 17	2026-08-12T01:49:04.1048749Z   Version: 17.0.19+10
+build	set up JDK 17	2026-08-12T01:49:04.1050007Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+build	set up JDK 17	2026-08-12T01:49:04.1051306Z 
+build	set up JDK 17	2026-08-12T01:49:04.1080093Z ##[endgroup]
+build	set up JDK 17	2026-08-12T01:49:04.1098868Z Creating settings.xml with server-id: github
+build	set up JDK 17	2026-08-12T01:49:04.1215935Z Writing to /home/runner/.m2/settings.xml
+build	Setup Gradle	﻿2026-08-12T01:49:04.1526763Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build	Setup Gradle	2026-08-12T01:49:04.1529208Z ##[group]Run gradle/actions/setup-gradle@v3
+build	Setup Gradle	2026-08-12T01:49:04.1529751Z with:
+build	Setup Gradle	2026-08-12T01:49:04.1530157Z   gradle-version: 8.1
+build	Setup Gradle	2026-08-12T01:49:04.1530595Z   cache-disabled: true
+build	Setup Gradle	2026-08-12T01:49:04.1531036Z   cache-read-only: false
+build	Setup Gradle	2026-08-12T01:49:04.1531491Z   cache-write-only: false
+build	Setup Gradle	2026-08-12T01:49:04.1531971Z   cache-overwrite-existing: false
+build	Setup Gradle	2026-08-12T01:49:04.1532568Z   gradle-home-cache-includes: caches
+build	Setup Gradle	notifications
+build	Setup Gradle	
+build	Setup Gradle	2026-08-12T01:49:04.1533213Z   gradle-home-cache-cleanup: false
+build	Setup Gradle	2026-08-12T01:49:04.1533727Z   add-job-summary: always
+build	Setup Gradle	2026-08-12T01:49:04.1534214Z   add-job-summary-as-pr-comment: never
+build	Setup Gradle	2026-08-12T01:49:04.1535140Z   dependency-graph: disabled
+build	Setup Gradle	2026-08-12T01:49:04.1535752Z   dependency-graph-continue-on-failure: true
+build	Setup Gradle	2026-08-12T01:49:04.1536375Z   build-scan-publish: false
+build	Setup Gradle	2026-08-12T01:49:04.1536874Z   validate-wrappers: false
+build	Setup Gradle	2026-08-12T01:49:04.1537362Z   generate-job-summary: true
+build	Setup Gradle	2026-08-12T01:49:04.1537884Z   gradle-home-cache-strict-match: false
+build	Setup Gradle	2026-08-12T01:49:04.1538429Z   workflow-job-context: null
+build	Setup Gradle	2026-08-12T01:49:04.1543069Z   github-token: ***
+build	Setup Gradle	2026-08-12T01:49:04.1543762Z env:
+build	Setup Gradle	2026-08-12T01:49:04.1544344Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+build	Setup Gradle	2026-08-12T01:49:04.1545473Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+build	Setup Gradle	2026-08-12T01:49:04.1546207Z ##[endgroup]
+build	Setup Gradle	2026-08-12T01:49:04.3746411Z (node:2035) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+build	Setup Gradle	2026-08-12T01:49:04.3756164Z (Use `node --trace-deprecation ...` to show where the warning was created)
+build	Setup Gradle	2026-08-12T01:49:04.6524065Z Cache is disabled: will not restore state from previous builds.
+build	Setup Gradle	2026-08-12T01:49:04.6539899Z Merged default JDK locations into /home/runner/.m2/toolchains.xml
+build	Setup Gradle	2026-08-12T01:49:04.7326406Z ##[group]Provision Gradle 8.1
+build	Setup Gradle	2026-08-12T01:49:06.2437073Z Downloaded https://services.gradle.org/distributions/gradle-8.1-bin.zip to /home/runner/gradle-installations/downloads/gradle-8.1-bin.zip (size 124637119)
+build	Setup Gradle	2026-08-12T01:49:06.2463542Z [command]/usr/bin/unzip -o -q /home/runner/gradle-installations/downloads/gradle-8.1-bin.zip
+build	Setup Gradle	2026-08-12T01:49:07.1848399Z Extracted Gradle 8.1 to /home/runner/gradle-installations/installs/gradle-8.1
+build	Setup Gradle	2026-08-12T01:49:07.1850463Z Provisioned Gradle executable /home/runner/gradle-installations/installs/gradle-8.1/bin/gradle
+build	Setup Gradle	2026-08-12T01:49:07.1856355Z ##[endgroup]
+build	Build with Gradle	﻿2026-08-12T01:49:07.2039330Z ##[group]Run gradle wrapper --gradle-version 8.1
+build	Build with Gradle	2026-08-12T01:49:07.2039796Z ^[[36;1mgradle wrapper --gradle-version 8.1^[[0m
+build	Build with Gradle	2026-08-12T01:49:07.2040112Z ^[[36;1mchmod +x gradlew^[[0m
+build	Build with Gradle	2026-08-12T01:49:07.2040389Z ^[[36;1m./gradlew assembleDebug --stacktrace^[[0m
+build	Build with Gradle	2026-08-12T01:49:07.2087999Z shell: /usr/bin/bash -e {0}
+build	Build with Gradle	2026-08-12T01:49:07.2088282Z env:
+build	Build with Gradle	2026-08-12T01:49:07.2088594Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+build	Build with Gradle	2026-08-12T01:49:07.2089098Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+build	Build with Gradle	2026-08-12T01:49:07.2089532Z   GRADLE_ACTION_ID: gradle/actions/setup-gradle
+build	Build with Gradle	2026-08-12T01:49:07.2089867Z   GRADLE_BUILD_ACTION_SETUP_COMPLETED: true
+build	Build with Gradle	2026-08-12T01:49:07.2090204Z   GRADLE_BUILD_ACTION_CACHE_RESTORED: true
+build	Build with Gradle	2026-08-12T01:49:07.2090641Z   DEVELOCITY_INJECTION_INIT_SCRIPT_NAME: gradle-actions.inject-develocity.init.gradle
+build	Build with Gradle	2026-08-12T01:49:07.2091137Z   DEVELOCITY_AUTO_INJECTION_CUSTOM_VALUE: gradle-actions
+build	Build with Gradle	2026-08-12T01:49:07.2091467Z   GITHUB_DEPENDENCY_GRAPH_ENABLED: false
+build	Build with Gradle	2026-08-12T01:49:07.2091756Z ##[endgroup]
+build	Build with Gradle	2026-08-12T01:49:08.8355331Z 
+build	Build with Gradle	2026-08-12T01:49:08.8395440Z Welcome to Gradle 8.1!
+build	Build with Gradle	2026-08-12T01:49:08.8405066Z 
+build	Build with Gradle	2026-08-12T01:49:08.8414490Z Here are the highlights of this release:
+build	Build with Gradle	2026-08-12T01:49:08.8415763Z  - Stable configuration cache
+build	Build with Gradle	2026-08-12T01:49:08.8418509Z  - Experimental Kotlin DSL assignment syntax
+build	Build with Gradle	2026-08-12T01:49:08.8419293Z  - Building with Java 20
+build	Build with Gradle	2026-08-12T01:49:08.8421291Z 
+build	Build with Gradle	2026-08-12T01:49:08.8421866Z For more details see https://docs.gradle.org/8.1/release-notes.html
+build	Build with Gradle	2026-08-12T01:49:08.8425777Z 
+build	Build with Gradle	2026-08-12T01:49:09.3291966Z Starting a Gradle Daemon (subsequent builds will be faster)
+build	Build with Gradle	2026-08-12T01:49:59.4356656Z > Task :wrapper
+build	Build with Gradle	2026-08-12T01:49:59.5066338Z 
+build	Build with Gradle	2026-08-12T01:49:59.5078468Z BUILD SUCCESSFUL in 51s
+build	Build with Gradle	2026-08-12T01:49:59.5087650Z 1 actionable task: 1 executed
+build	Build with Gradle	2026-08-12T01:49:59.9949570Z Downloading https://services.gradle.org/distributions/gradle-8.1-bin.zip
+build	Build with Gradle	2026-08-12T01:50:02.2136204Z ...........10%............20%............30%............40%............50%............60%............70%............80%...........90%............100%
+build	Build with Gradle	2026-08-12T01:50:07.4136512Z Checking the license for package Android SDK Build-Tools 33.0.1 in /usr/local/lib/android/sdk/licenses
+build	Build with Gradle	2026-08-12T01:50:07.4154149Z License for package Android SDK Build-Tools 33.0.1 accepted.
+build	Build with Gradle	2026-08-12T01:50:07.4155432Z Preparing "Install Android SDK Build-Tools 33.0.1 v.33.0.1".
+build	Build with Gradle	2026-08-12T01:50:08.5131376Z "Install Android SDK Build-Tools 33.0.1 v.33.0.1" ready.
+build	Build with Gradle	2026-08-12T01:50:08.5172149Z Installing Android SDK Build-Tools 33.0.1 in /usr/local/lib/android/sdk/build-tools/33.0.1
+build	Build with Gradle	2026-08-12T01:50:08.5190572Z "Install Android SDK Build-Tools 33.0.1 v.33.0.1" complete.
+build	Build with Gradle	2026-08-12T01:50:08.8117093Z "Install Android SDK Build-Tools 33.0.1 v.33.0.1" finished.
+build	Build with Gradle	2026-08-12T01:50:08.8144172Z Checking the license for package Android SDK Platform 33 in /usr/local/lib/android/sdk/licenses
+build	Build with Gradle	2026-08-12T01:50:08.8145417Z License for package Android SDK Platform 33 accepted.
+build	Build with Gradle	2026-08-12T01:50:08.8168865Z Preparing "Install Android SDK Platform 33 (revision 3)".
+build	Build with Gradle	2026-08-12T01:50:12.2132198Z "Install Android SDK Platform 33 (revision 3)" ready.
+build	Build with Gradle	2026-08-12T01:50:12.2151339Z Installing Android SDK Platform 33 in /usr/local/lib/android/sdk/platforms/android-33
+build	Build with Gradle	2026-08-12T01:50:12.2168725Z "Install Android SDK Platform 33 (revision 3)" complete.
+build	Build with Gradle	2026-08-12T01:50:12.2243100Z "Install Android SDK Platform 33 (revision 3)" finished.
+build	Build with Gradle	2026-08-12T01:50:12.6124916Z > Task :app:preBuild UP-TO-DATE
+build	Build with Gradle	2026-08-12T01:50:12.6126141Z > Task :app:preDebugBuild UP-TO-DATE
+build	Build with Gradle	2026-08-12T01:50:12.7142110Z > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+build	Build with Gradle	2026-08-12T01:50:17.0135169Z 
+build	Build with Gradle	2026-08-12T01:50:17.0135741Z > Task :app:checkDebugAarMetadata FAILED
+build	Build with Gradle	2026-08-12T01:50:17.0155543Z FAILURE: Build failed with an exception.
+build	Build with Gradle	2026-08-12T01:50:17.0194980Z 
+build	Build with Gradle	2026-08-12T01:50:17.0235220Z * What went wrong:
+build	Build with Gradle	2026-08-12T01:50:17.0236078Z Execution failed for task ':app:checkDebugAarMetadata'.
+build	Build with Gradle	2026-08-12T01:50:17.0276141Z > Configuration `:app:debugRuntimeClasspath` contains AndroidX dependencies, but the `android.useAndroidX` property is not enabled, which may cause runtime issues.
+build	Build with Gradle	2026-08-12T01:50:17.0295333Z   Set `android.useAndroidX=true` in the `gradle.properties` file and retry.
+build	Build with Gradle	2026-08-12T01:50:17.0299641Z   The following AndroidX dependencies are detected:
+build	Build with Gradle	2026-08-12T01:50:17.0345486Z   :app:debugRuntimeClasspath -> androidx.compose.ui:ui-tooling:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.0385449Z   :app:debugRuntimeClasspath -> androidx.activity:activity-compose:1.7.2
+build	Build with Gradle	2026-08-12T01:50:17.0396073Z   :app:debugRuntimeClasspath -> androidx.compose.ui:ui-test-manifest:1.4.0 -> androidx.activity:activity:1.7.2 -> androidx.activity:activity-ktx:1.7.2
+build	Build with Gradle	2026-08-12T01:50:17.0418559Z   :app:debugRuntimeClasspath -> androidx.compose.ui:ui-test-manifest:1.4.0 -> androidx.activity:activity:1.7.2
+build	Build with Gradle	2026-08-12T01:50:17.0435924Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.animation:animation-core:1.4.0 -> androidx.annotation:annotation:1.6.0
+build	Build with Gradle	2026-08-12T01:50:17.0476274Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.animation:animation-core:1.4.0 -> androidx.annotation:annotation:1.6.0 -> androidx.annotation:annotation-jvm:1.6.0
+build	Build with Gradle	2026-08-12T01:50:17.0495920Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.ui:ui-text:1.4.0 -> androidx.collection:collection:1.1.0
+build	Build with Gradle	2026-08-12T01:50:17.0536071Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation-layout:1.4.0 -> androidx.core:core:1.10.1
+build	Build with Gradle	2026-08-12T01:50:17.0547832Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation-layout:1.4.0 -> androidx.core:core:1.10.1 -> androidx.annotation:annotation-experimental:1.3.0
+build	Build with Gradle	2026-08-12T01:50:17.0555291Z 1 actionable task: 1 executed
+build	Build with Gradle	2026-08-12T01:50:17.0576351Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation-layout:1.4.0 -> androidx.core:core:1.10.1 -> androidx.concurrent:concurrent-futures:1.1.0
+build	Build with Gradle	2026-08-12T01:50:17.0617597Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation-layout:1.4.0 -> androidx.core:core:1.10.1 -> androidx.interpolator:interpolator:1.0.0
+build	Build with Gradle	2026-08-12T01:50:17.0646272Z   :app:debugRuntimeClasspath -> androidx.compose.material3:material3:1.0.0 -> androidx.lifecycle:lifecycle-runtime:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.0667076Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation:1.4.0 -> androidx.emoji2:emoji2:1.3.0 -> androidx.lifecycle:lifecycle-process:2.6.1 -> androidx.lifecycle:lifecycle-livedata-core:2.6.1 -> androidx.arch.core:core-common:2.2.0
+build	Build with Gradle	2026-08-12T01:50:17.0677056Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation:1.4.0 -> androidx.emoji2:emoji2:1.3.0 -> androidx.lifecycle:lifecycle-process:2.6.1 -> androidx.lifecycle:lifecycle-livedata-core:2.6.1 -> androidx.arch.core:core-runtime:2.2.0
+build	Build with Gradle	2026-08-12T01:50:17.0695740Z   :app:debugRuntimeClasspath -> androidx.compose.ui:ui-tooling:1.4.0 -> androidx.lifecycle:lifecycle-common:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.0715570Z   :app:debugRuntimeClasspath -> androidx.lifecycle:lifecycle-runtime-ktx:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.0735763Z   :app:debugRuntimeClasspath -> androidx.compose.material3:material3:1.0.0 -> androidx.lifecycle:lifecycle-viewmodel:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.0746159Z   :app:debugRuntimeClasspath -> androidx.compose.ui:ui-test-manifest:1.4.0 -> androidx.activity:activity:1.7.2 -> androidx.activity:activity-ktx:1.7.2 -> androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.0756045Z   :app:debugRuntimeClasspath -> androidx.compose.ui:ui-test-manifest:1.4.0 -> androidx.activity:activity:1.7.2 -> androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.0758643Z   :app:debugRuntimeClasspath -> androidx.core:core-ktx:1.10.1
+build	Build with Gradle	2026-08-12T01:50:17.0761199Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation:1.4.0 -> androidx.emoji2:emoji2:1.3.0 -> androidx.lifecycle:lifecycle-process:2.6.1 -> androidx.lifecycle:lifecycle-livedata-core:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.0764245Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation:1.4.0 -> androidx.emoji2:emoji2:1.3.0 -> androidx.lifecycle:lifecycle-process:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.0767326Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation:1.4.0 -> androidx.emoji2:emoji2:1.3.0 -> androidx.startup:startup-runtime:1.1.1
+build	Build with Gradle	2026-08-12T01:50:17.0769780Z   :app:debugRuntimeClasspath -> androidx.compose.ui:ui-test-manifest:1.4.0 -> androidx.activity:activity:1.7.2 -> androidx.tracing:tracing:1.0.0
+build	Build with Gradle	2026-08-12T01:50:17.0771910Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.material:material:1.4.0 -> androidx.savedstate:savedstate:1.2.1
+build	Build with Gradle	2026-08-12T01:50:17.0773899Z   :app:debugRuntimeClasspath -> androidx.compose.material3:material3:1.0.0 -> androidx.savedstate:savedstate-ktx:1.2.1
+build	Build with Gradle	2026-08-12T01:50:17.0795872Z   :app:debugRuntimeClasspath -> androidx.compose.ui:ui-test-manifest:1.4.0 -> androidx.activity:activity:1.7.2 -> androidx.profileinstaller:profileinstaller:1.3.0
+build	Build with Gradle	2026-08-12T01:50:17.0816284Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation-layout:1.4.0 -> androidx.core:core:1.10.1 -> androidx.versionedparcelable:versionedparcelable:1.1.1
+build	Build with Gradle	2026-08-12T01:50:17.0835596Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.runtime:runtime:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.0855690Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.runtime:runtime-saveable:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.0857062Z   :app:debugRuntimeClasspath -> androidx.compose.ui:ui:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.0875648Z   :app:debugRuntimeClasspath -> androidx.compose.ui:ui:1.4.0 -> androidx.autofill:autofill:1.0.0
+build	Build with Gradle	2026-08-12T01:50:17.0895609Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.ui:ui-geometry:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.0935640Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.ui:ui-util:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.0967244Z   :app:debugRuntimeClasspath -> androidx.compose.ui:ui-graphics:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.0985510Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.ui:ui-unit:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.0986982Z   :app:debugRuntimeClasspath -> androidx.compose.ui:ui-test-manifest:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1005614Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.ui:ui-text:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1025804Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation:1.4.0 -> androidx.emoji2:emoji2:1.3.0
+build	Build with Gradle	2026-08-12T01:50:17.1044775Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.ui:ui-tooling-data:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1046001Z   :app:debugRuntimeClasspath -> androidx.compose.ui:ui-tooling-preview:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1047201Z   :app:debugRuntimeClasspath -> androidx.compose.ui:ui:1.4.0 -> androidx.customview:customview-poolingcontainer:1.0.0
+build	Build with Gradle	2026-08-12T01:50:17.1048668Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1050086Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.animation:animation:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1051805Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.animation:animation-core:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1053354Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation-layout:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1085453Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.material:material:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1086994Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.material:material-icons-core:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1088542Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.material:material-ripple:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1089714Z   :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00
+build	Build with Gradle	2026-08-12T01:50:17.1090610Z   :app:debugRuntimeClasspath -> androidx.compose.material3:material3:1.0.0
+build	Build with Gradle	2026-08-12T01:50:17.1091445Z   :app:debugRuntimeClasspath -> androidx.room:room-runtime:2.5.2
+build	Build with Gradle	2026-08-12T01:50:17.1092404Z   :app:debugRuntimeClasspath -> androidx.room:room-ktx:2.5.2 -> androidx.room:room-common:2.5.2
+build	Build with Gradle	2026-08-12T01:50:17.1093555Z   :app:debugRuntimeClasspath -> androidx.room:room-runtime:2.5.2 -> androidx.sqlite:sqlite:2.3.1
+build	Build with Gradle	2026-08-12T01:50:17.1115028Z   :app:debugRuntimeClasspath -> androidx.room:room-runtime:2.5.2 -> androidx.sqlite:sqlite-framework:2.3.1
+build	Build with Gradle	2026-08-12T01:50:17.1116117Z   :app:debugRuntimeClasspath -> androidx.room:room-ktx:2.5.2
+build	Build with Gradle	2026-08-12T01:50:17.1116570Z 
+build	Build with Gradle	2026-08-12T01:50:17.1116702Z * Try:
+build	Build with Gradle	2026-08-12T01:50:17.1117206Z > Run with --info or --debug option to get more log output.
+build	Build with Gradle	2026-08-12T01:50:17.1117814Z > Run with --scan to get full insights.
+build	Build with Gradle	2026-08-12T01:50:17.1118132Z 
+build	Build with Gradle	2026-08-12T01:50:17.1118272Z * Exception is:
+build	Build with Gradle	2026-08-12T01:50:17.1119031Z org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':app:checkDebugAarMetadata'.
+build	Build with Gradle	2026-08-12T01:50:17.1120505Z 	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:38)
+build	Build with Gradle	2026-08-12T01:50:17.1122112Z 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+build	Build with Gradle	2026-08-12T01:50:17.1123624Z 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+build	Build with Gradle	2026-08-12T01:50:17.1125287Z 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+build	Build with Gradle	2026-08-12T01:50:17.1127042Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+build	Build with Gradle	2026-08-12T01:50:17.1129049Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:199)
+build	Build with Gradle	2026-08-12T01:50:17.1130806Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+build	Build with Gradle	2026-08-12T01:50:17.1132590Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+build	Build with Gradle	2026-08-12T01:50:17.1134106Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:157)
+build	Build with Gradle	2026-08-12T01:50:17.1176051Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+build	Build with Gradle	2026-08-12T01:50:17.1177674Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+build	Build with Gradle	2026-08-12T01:50:17.1179224Z 	at org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:73)
+build	Build with Gradle	2026-08-12T01:50:17.1180746Z 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+build	Build with Gradle	2026-08-12T01:50:17.1182161Z 	at org.gradle.execution.plan.LocalTaskNodeExecutor.execute(LocalTaskNodeExecutor.java:42)
+build	Build with Gradle	2026-08-12T01:50:17.1183606Z 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:337)
+build	Build with Gradle	2026-08-12T01:50:17.1185709Z 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:324)
+build	Build with Gradle	2026-08-12T01:50:17.1187649Z 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:317)
+build	Build with Gradle	2026-08-12T01:50:17.1189976Z 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
+build	Build with Gradle	2026-08-12T01:50:17.1191696Z 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:463)
+build	Build with Gradle	2026-08-12T01:50:17.1193039Z 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:380)
+build	Build with Gradle	2026-08-12T01:50:17.1194293Z 	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:116)
+build	Build with Gradle	2026-08-12T01:50:17.1249319Z 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.executeWithServices(DefaultTaskExecutionGraph.java:138)
+build	Build with Gradle	2026-08-12T01:50:17.1250966Z 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.execute(DefaultTaskExecutionGraph.java:123)
+build	Build with Gradle	2026-08-12T01:50:17.1252310Z 	at org.gradle.execution.SelectedTaskExecutionAction.execute(SelectedTaskExecutionAction.java:35)
+build	Build with Gradle	2026-08-12T01:50:17.1253646Z 	at org.gradle.execution.DryRunBuildExecutionAction.execute(DryRunBuildExecutionAction.java:51)
+build	Build with Gradle	2026-08-12T01:50:17.1255467Z 	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:54)
+build	Build with Gradle	2026-08-12T01:50:17.1257464Z 	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:43)
+build	Build with Gradle	2026-08-12T01:50:17.1259352Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+build	Build with Gradle	2026-08-12T01:50:17.1261354Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:199)
+build	Build with Gradle	2026-08-12T01:50:17.1263156Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+build	Build with Gradle	2026-08-12T01:50:17.1314869Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+build	Build with Gradle	2026-08-12T01:50:17.1316543Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:157)
+build	Build with Gradle	2026-08-12T01:50:17.1318118Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+build	Build with Gradle	2026-08-12T01:50:17.1319641Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+build	Build with Gradle	2026-08-12T01:50:17.1321185Z 	at org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:73)
+build	Build with Gradle	2026-08-12T01:50:17.1323076Z 	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor.execute(BuildOperationFiringBuildWorkerExecutor.java:40)
+build	Build with Gradle	2026-08-12T01:50:17.1325221Z 	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$10(DefaultBuildLifecycleController.java:202)
+build	Build with Gradle	2026-08-12T01:50:17.1326859Z 	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
+build	Build with Gradle	2026-08-12T01:50:17.1328350Z 	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$8(StateTransitionController.java:177)
+build	Build with Gradle	2026-08-12T01:50:17.1329670Z 	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:44)
+build	Build with Gradle	2026-08-12T01:50:17.1330938Z 	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:177)
+build	Build with Gradle	2026-08-12T01:50:17.1332466Z 	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:202)
+build	Build with Gradle	2026-08-12T01:50:17.1334176Z 	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:209)
+build	Build with Gradle	2026-08-12T01:50:17.1356226Z 	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:249)
+build	Build with Gradle	2026-08-12T01:50:17.1357731Z 	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:109)
+build	Build with Gradle	2026-08-12T01:50:17.1359493Z 	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:172)
+build	Build with Gradle	2026-08-12T01:50:17.1375420Z 	at org.gradle.composite.internal.DefaultBuildController.access$000(DefaultBuildController.java:47)
+build	Build with Gradle	2026-08-12T01:50:17.1377138Z 	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:191)
+build	Build with Gradle	2026-08-12T01:50:17.1378575Z 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+build	Build with Gradle	2026-08-12T01:50:17.1379915Z 	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:49)
+build	Build with Gradle	2026-08-12T01:50:17.1382038Z Caused by: com.android.builder.errors.EvalIssueException: Configuration `:app:debugRuntimeClasspath` contains AndroidX dependencies, but the `android.useAndroidX` property is not enabled, which may cause runtime issues.
+build	Build with Gradle	2026-08-12T01:50:17.1383913Z Set `android.useAndroidX=true` in the `gradle.properties` file and retry.
+build	Build with Gradle	2026-08-12T01:50:17.1425052Z The following AndroidX dependencies are detected:
+build	Build with Gradle	2026-08-12T01:50:17.1425881Z :app:debugRuntimeClasspath -> androidx.compose.ui:ui-tooling:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1426775Z :app:debugRuntimeClasspath -> androidx.activity:activity-compose:1.7.2
+build	Build with Gradle	2026-08-12T01:50:17.1428164Z :app:debugRuntimeClasspath -> androidx.compose.ui:ui-test-manifest:1.4.0 -> androidx.activity:activity:1.7.2 -> androidx.activity:activity-ktx:1.7.2
+build	Build with Gradle	2026-08-12T01:50:17.1429795Z :app:debugRuntimeClasspath -> androidx.compose.ui:ui-test-manifest:1.4.0 -> androidx.activity:activity:1.7.2
+build	Build with Gradle	2026-08-12T01:50:17.1431492Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.animation:animation-core:1.4.0 -> androidx.annotation:annotation:1.6.0
+build	Build with Gradle	2026-08-12T01:50:17.1433791Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.animation:animation-core:1.4.0 -> androidx.annotation:annotation:1.6.0 -> androidx.annotation:annotation-jvm:1.6.0
+build	Build with Gradle	2026-08-12T01:50:17.1446302Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.ui:ui-text:1.4.0 -> androidx.collection:collection:1.1.0
+build	Build with Gradle	2026-08-12T01:50:17.1448205Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation-layout:1.4.0 -> androidx.core:core:1.10.1
+build	Build with Gradle	2026-08-12T01:50:17.1450412Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation-layout:1.4.0 -> androidx.core:core:1.10.1 -> androidx.annotation:annotation-experimental:1.3.0
+build	Build with Gradle	2026-08-12T01:50:17.1452892Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation-layout:1.4.0 -> androidx.core:core:1.10.1 -> androidx.concurrent:concurrent-futures:1.1.0
+build	Build with Gradle	2026-08-12T01:50:17.1496544Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation-layout:1.4.0 -> androidx.core:core:1.10.1 -> androidx.interpolator:interpolator:1.0.0
+build	Build with Gradle	2026-08-12T01:50:17.1498539Z :app:debugRuntimeClasspath -> androidx.compose.material3:material3:1.0.0 -> androidx.lifecycle:lifecycle-runtime:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.1501062Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation:1.4.0 -> androidx.emoji2:emoji2:1.3.0 -> androidx.lifecycle:lifecycle-process:2.6.1 -> androidx.lifecycle:lifecycle-livedata-core:2.6.1 -> androidx.arch.core:core-common:2.2.0
+build	Build with Gradle	2026-08-12T01:50:17.1504910Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation:1.4.0 -> androidx.emoji2:emoji2:1.3.0 -> androidx.lifecycle:lifecycle-process:2.6.1 -> androidx.lifecycle:lifecycle-livedata-core:2.6.1 -> androidx.arch.core:core-runtime:2.2.0
+build	Build with Gradle	2026-08-12T01:50:17.1507465Z :app:debugRuntimeClasspath -> androidx.compose.ui:ui-tooling:1.4.0 -> androidx.lifecycle:lifecycle-common:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.1508694Z :app:debugRuntimeClasspath -> androidx.lifecycle:lifecycle-runtime-ktx:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.1545160Z :app:debugRuntimeClasspath -> androidx.compose.material3:material3:1.0.0 -> androidx.lifecycle:lifecycle-viewmodel:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.1547170Z :app:debugRuntimeClasspath -> androidx.compose.ui:ui-test-manifest:1.4.0 -> androidx.activity:activity:1.7.2 -> androidx.activity:activity-ktx:1.7.2 -> androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.1549349Z :app:debugRuntimeClasspath -> androidx.compose.ui:ui-test-manifest:1.4.0 -> androidx.activity:activity:1.7.2 -> androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.1550701Z :app:debugRuntimeClasspath -> androidx.core:core-ktx:1.10.1
+build	Build with Gradle	2026-08-12T01:50:17.1552566Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation:1.4.0 -> androidx.emoji2:emoji2:1.3.0 -> androidx.lifecycle:lifecycle-process:2.6.1 -> androidx.lifecycle:lifecycle-livedata-core:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.1555456Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation:1.4.0 -> androidx.emoji2:emoji2:1.3.0 -> androidx.lifecycle:lifecycle-process:2.6.1
+build	Build with Gradle	2026-08-12T01:50:17.1557903Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation:1.4.0 -> androidx.emoji2:emoji2:1.3.0 -> androidx.startup:startup-runtime:1.1.1
+build	Build with Gradle	2026-08-12T01:50:17.1560009Z :app:debugRuntimeClasspath -> androidx.compose.ui:ui-test-manifest:1.4.0 -> androidx.activity:activity:1.7.2 -> androidx.tracing:tracing:1.0.0
+build	Build with Gradle	2026-08-12T01:50:17.1561850Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.material:material:1.4.0 -> androidx.savedstate:savedstate:1.2.1
+build	Build with Gradle	2026-08-12T01:50:17.1563547Z :app:debugRuntimeClasspath -> androidx.compose.material3:material3:1.0.0 -> androidx.savedstate:savedstate-ktx:1.2.1
+build	Build with Gradle	2026-08-12T01:50:17.1569175Z :app:debugRuntimeClasspath -> androidx.compose.ui:ui-test-manifest:1.4.0 -> androidx.activity:activity:1.7.2 -> androidx.profileinstaller:profileinstaller:1.3.0
+build	Build with Gradle	2026-08-12T01:50:17.1577887Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation-layout:1.4.0 -> androidx.core:core:1.10.1 -> androidx.versionedparcelable:versionedparcelable:1.1.1
+build	Build with Gradle	2026-08-12T01:50:17.1579894Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.runtime:runtime:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1581296Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.runtime:runtime-saveable:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1582482Z :app:debugRuntimeClasspath -> androidx.compose.ui:ui:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1602247Z :app:debugRuntimeClasspath -> androidx.compose.ui:ui:1.4.0 -> androidx.autofill:autofill:1.0.0
+build	Build with Gradle	2026-08-12T01:50:17.1603555Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.ui:ui-geometry:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1605149Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.ui:ui-util:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1606231Z :app:debugRuntimeClasspath -> androidx.compose.ui:ui-graphics:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1607268Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.ui:ui-unit:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1608343Z :app:debugRuntimeClasspath -> androidx.compose.ui:ui-test-manifest:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1609411Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.ui:ui-text:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1610919Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation:1.4.0 -> androidx.emoji2:emoji2:1.3.0
+build	Build with Gradle	2026-08-12T01:50:17.1612481Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.ui:ui-tooling-data:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1613580Z :app:debugRuntimeClasspath -> androidx.compose.ui:ui-tooling-preview:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1655058Z :app:debugRuntimeClasspath -> androidx.compose.ui:ui:1.4.0 -> androidx.customview:customview-poolingcontainer:1.0.0
+build	Build with Gradle	2026-08-12T01:50:17.1656834Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1658265Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.animation:animation:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1659680Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.animation:animation-core:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1661146Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.foundation:foundation-layout:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1662584Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.material:material:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1663987Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.material:material-icons-core:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1665670Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00 -> androidx.compose.material:material-ripple:1.4.0
+build	Build with Gradle	2026-08-12T01:50:17.1666824Z :app:debugRuntimeClasspath -> androidx.compose:compose-bom:2023.03.00
+build	Build with Gradle	2026-08-12T01:50:17.1667682Z :app:debugRuntimeClasspath -> androidx.compose.material3:material3:1.0.0
+build	Build with Gradle	2026-08-12T01:50:17.1668498Z :app:debugRuntimeClasspath -> androidx.room:room-runtime:2.5.2
+build	Build with Gradle	2026-08-12T01:50:17.1669404Z :app:debugRuntimeClasspath -> androidx.room:room-ktx:2.5.2 -> androidx.room:room-common:2.5.2
+build	Build with Gradle	2026-08-12T01:50:17.1670495Z :app:debugRuntimeClasspath -> androidx.room:room-runtime:2.5.2 -> androidx.sqlite:sqlite:2.3.1
+build	Build with Gradle	2026-08-12T01:50:17.1671666Z :app:debugRuntimeClasspath -> androidx.room:room-runtime:2.5.2 -> androidx.sqlite:sqlite-framework:2.3.1
+build	Build with Gradle	2026-08-12T01:50:17.1672648Z :app:debugRuntimeClasspath -> androidx.room:room-ktx:2.5.2
+build	Build with Gradle	2026-08-12T01:50:17.1673471Z 	at com.android.builder.errors.IssueReporter.reportError(IssueReporter.kt:114)
+build	Build with Gradle	2026-08-12T01:50:17.1674514Z 	at com.android.builder.errors.IssueReporter.reportError$default(IssueReporter.kt:110)
+build	Build with Gradle	2026-08-12T01:50:17.1712776Z 	at com.android.build.gradle.internal.dependency.AndroidXDependencyCheck$AndroidXDisabledJetifierDisabled.execute(AndroidXDependencyCheck.kt:77)
+build	Build with Gradle	2026-08-12T01:50:17.1715122Z 	at com.android.build.gradle.internal.dependency.AndroidXDependencyCheck$AndroidXDisabledJetifierDisabled.execute(AndroidXDependencyCheck.kt:42)
+build	Build with Gradle	2026-08-12T01:50:17.1717283Z 	at org.gradle.configuration.internal.DefaultUserCodeApplicationContext$CurrentApplication$1.execute(DefaultUserCodeApplicationContext.java:123)
+build	Build with Gradle	2026-08-12T01:50:17.1719075Z 	at org.gradle.internal.event.BroadcastDispatch$ActionInvocationHandler.dispatch(BroadcastDispatch.java:97)
+build	Build with Gradle	2026-08-12T01:50:17.1720795Z 	at org.gradle.internal.event.BroadcastDispatch$ActionInvocationHandler.dispatch(BroadcastDispatch.java:85)
+build	Build with Gradle	2026-08-12T01:50:17.1722229Z 	at org.gradle.internal.event.AbstractBroadcastDispatch.dispatch(AbstractBroadcastDispatch.java:43)
+build	Build with Gradle	2026-08-12T01:50:17.1723626Z 	at org.gradle.internal.event.BroadcastDispatch$SingletonDispatch.dispatch(BroadcastDispatch.java:257)
+build	Build with Gradle	2026-08-12T01:50:17.1725227Z 	at org.gradle.internal.event.BroadcastDispatch$SingletonDispatch.dispatch(BroadcastDispatch.java:164)
+build	Build with Gradle	2026-08-12T01:50:17.1726613Z 	at org.gradle.internal.event.AbstractBroadcastDispatch.dispatch(AbstractBroadcastDispatch.java:83)
+build	Build with Gradle	2026-08-12T01:50:17.1765093Z 	at org.gradle.internal.event.AbstractBroadcastDispatch.dispatch(AbstractBroadcastDispatch.java:69)
+build	Build with Gradle	2026-08-12T01:50:17.1766672Z 	at org.gradle.internal.event.BroadcastDispatch$CompositeDispatch.dispatch(BroadcastDispatch.java:363)
+build	Build with Gradle	2026-08-12T01:50:17.1768076Z 	at org.gradle.internal.event.BroadcastDispatch$CompositeDispatch.dispatch(BroadcastDispatch.java:261)
+build	Build with Gradle	2026-08-12T01:50:17.1769351Z 	at org.gradle.internal.event.ListenerBroadcast.dispatch(ListenerBroadcast.java:148)
+build	Build with Gradle	2026-08-12T01:50:17.1770621Z 	at org.gradle.internal.event.ListenerBroadcast.dispatch(ListenerBroadcast.java:37)
+build	Build with Gradle	2026-08-12T01:50:17.1772056Z 	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+build	Build with Gradle	2026-08-12T01:50:17.1773563Z 	at jdk.proxy1/jdk.proxy1.$Proxy60.afterResolve(Unknown Source)
+build	Build with Gradle	2026-08-12T01:50:17.1774968Z 	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$1.call(DefaultConfiguration.java:733)
+build	Build with Gradle	2026-08-12T01:50:17.1776509Z 	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$1.call(DefaultConfiguration.java:711)
+build	Build with Gradle	2026-08-12T01:50:17.1778226Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+build	Build with Gradle	2026-08-12T01:50:17.1780136Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:199)
+build	Build with Gradle	2026-08-12T01:50:17.1781841Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+build	Build with Gradle	2026-08-12T01:50:17.1783385Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+build	Build with Gradle	2026-08-12T01:50:17.1825205Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:157)
+build	Build with Gradle	2026-08-12T01:50:17.1826823Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+build	Build with Gradle	2026-08-12T01:50:17.1828315Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+build	Build with Gradle	2026-08-12T01:50:17.1829793Z 	at org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:73)
+build	Build with Gradle	2026-08-12T01:50:17.1831808Z 	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.resolveGraphIfRequired(DefaultConfiguration.java:711)
+build	Build with Gradle	2026-08-12T01:50:17.1833688Z 	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.lambda$resolveExclusively$4(DefaultConfiguration.java:691)
+build	Build with Gradle	2026-08-12T01:50:17.1835737Z 	at org.gradle.api.internal.project.DefaultProjectStateRegistry$CalculatedModelValueImpl.update(DefaultProjectStateRegistry.java:493)
+build	Build with Gradle	2026-08-12T01:50:17.1837608Z 	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.resolveExclusively(DefaultConfiguration.java:688)
+build	Build with Gradle	2026-08-12T01:50:17.1839483Z 	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.resolveToStateOrLater(DefaultConfiguration.java:675)
+build	Build with Gradle	2026-08-12T01:50:17.1841257Z 	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.access$1800(DefaultConfiguration.java:177)
+build	Build with Gradle	2026-08-12T01:50:17.1843145Z 	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$VisitedArtifactsSetProvider.getValue(DefaultConfiguration.java:1661)
+build	Build with Gradle	2026-08-12T01:50:17.1885996Z 	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$VisitedArtifactsSetProvider.getValue(DefaultConfiguration.java:1650)
+build	Build with Gradle	2026-08-12T01:50:17.1888088Z 	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$SelectedArtifactsProvider.getValue(DefaultConfiguration.java:1697)
+build	Build with Gradle	2026-08-12T01:50:17.1890115Z 	at org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$SelectedArtifactsProvider.getValue(DefaultConfiguration.java:1666)
+build	Build with Gradle	2026-08-12T01:50:17.1892270Z 	at org.gradle.api.internal.artifacts.configurations.ResolutionBackedFileCollection.getSelectedArtifacts(ResolutionBackedFileCollection.java:85)
+build	Build with Gradle	2026-08-12T01:50:17.1894483Z 	at org.gradle.api.internal.artifacts.configurations.ResolutionBackedFileCollection.visitContents(ResolutionBackedFileCollection.java:72)
+build	Build with Gradle	2026-08-12T01:50:17.1896474Z 	at org.gradle.api.internal.file.AbstractFileCollection.visitStructure(AbstractFileCollection.java:366)
+build	Build with Gradle	2026-08-12T01:50:17.1897975Z 	at org.gradle.api.internal.file.CompositeFileCollection.lambda$visitContents$0(CompositeFileCollection.java:133)
+build	Build with Gradle	2026-08-12T01:50:17.1899330Z 	at org.gradle.api.internal.file.collections.UnpackingVisitor.add(UnpackingVisitor.java:67)
+build	Build with Gradle	2026-08-12T01:50:17.1900512Z 	at org.gradle.api.internal.file.collections.UnpackingVisitor.add(UnpackingVisitor.java:92)
+build	Build with Gradle	2026-08-12T01:50:17.1902287Z 	at org.gradle.api.internal.file.DefaultFileCollectionFactory$ResolvingFileCollection.visitChildren(DefaultFileCollectionFactory.java:285)
+build	Build with Gradle	2026-08-12T01:50:17.1903967Z 	at org.gradle.api.internal.file.CompositeFileCollection.visitContents(CompositeFileCollection.java:133)
+build	Build with Gradle	2026-08-12T01:50:17.1935795Z 	at org.gradle.api.internal.file.AbstractFileCollection.visitStructure(AbstractFileCollection.java:366)
+build	Build with Gradle	2026-08-12T01:50:17.1937306Z 	at org.gradle.api.internal.file.CompositeFileCollection.lambda$visitContents$0(CompositeFileCollection.java:133)
+build	Build with Gradle	2026-08-12T01:50:17.1938765Z 	at org.gradle.api.internal.tasks.PropertyFileCollection.visitChildren(PropertyFileCollection.java:48)
+build	Build with Gradle	2026-08-12T01:50:17.1940205Z 	at org.gradle.api.internal.file.CompositeFileCollection.visitContents(CompositeFileCollection.java:133)
+build	Build with Gradle	2026-08-12T01:50:17.1941615Z 	at org.gradle.api.internal.file.AbstractFileCollection.visitStructure(AbstractFileCollection.java:366)
+build	Build with Gradle	2026-08-12T01:50:17.1943236Z 	at org.gradle.internal.fingerprint.impl.DefaultFileCollectionSnapshotter.snapshot(DefaultFileCollectionSnapshotter.java:47)
+build	Build with Gradle	2026-08-12T01:50:17.1945381Z 	at org.gradle.internal.execution.impl.DefaultInputFingerprinter$InputCollectingVisitor.visitInputFileProperty(DefaultInputFingerprinter.java:133)
+build	Build with Gradle	2026-08-12T01:50:17.1947060Z 	at org.gradle.api.internal.tasks.execution.TaskExecution.visitRegularInputs(TaskExecution.java:322)
+build	Build with Gradle	2026-08-12T01:50:17.1948715Z 	at org.gradle.internal.execution.impl.DefaultInputFingerprinter.fingerprintInputProperties(DefaultInputFingerprinter.java:63)
+build	Build with Gradle	2026-08-12T01:50:17.1950818Z 	at org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.captureExecutionStateWithOutputs(CaptureStateBeforeExecutionStep.java:123)
+build	Build with Gradle	2026-08-12T01:50:17.1953000Z 	at org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.lambda$captureExecutionState$1(CaptureStateBeforeExecutionStep.java:82)
+build	Build with Gradle	2026-08-12T01:50:17.2004971Z 	at org.gradle.internal.execution.steps.BuildOperationStep$1.call(BuildOperationStep.java:37)
+build	Build with Gradle	2026-08-12T01:50:17.2006574Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+build	Build with Gradle	2026-08-12T01:50:17.2008550Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:199)
+build	Build with Gradle	2026-08-12T01:50:17.2010290Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+build	Build with Gradle	2026-08-12T01:50:17.2011844Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+build	Build with Gradle	2026-08-12T01:50:17.2013397Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:157)
+build	Build with Gradle	2026-08-12T01:50:17.2015488Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+build	Build with Gradle	2026-08-12T01:50:17.2016983Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+build	Build with Gradle	2026-08-12T01:50:17.2018473Z 	at org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:73)
+build	Build with Gradle	2026-08-12T01:50:17.2019880Z 	at org.gradle.internal.execution.steps.BuildOperationStep.operation(BuildOperationStep.java:34)
+build	Build with Gradle	2026-08-12T01:50:17.2021539Z 	at org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.captureExecutionState(CaptureStateBeforeExecutionStep.java:76)
+build	Build with Gradle	2026-08-12T01:50:17.2023448Z 	at org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.lambda$execute$0(CaptureStateBeforeExecutionStep.java:70)
+build	Build with Gradle	2026-08-12T01:50:17.2055680Z 	at org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.execute(CaptureStateBeforeExecutionStep.java:70)
+build	Build with Gradle	2026-08-12T01:50:17.2057543Z 	at org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.execute(CaptureStateBeforeExecutionStep.java:45)
+build	Build with Gradle	2026-08-12T01:50:17.2059248Z 	at org.gradle.internal.execution.steps.SkipEmptyWorkStep.executeWithNonEmptySources(SkipEmptyWorkStep.java:177)
+build	Build with Gradle	2026-08-12T01:50:17.2060908Z 	at org.gradle.internal.execution.steps.SkipEmptyWorkStep.execute(SkipEmptyWorkStep.java:81)
+build	Build with Gradle	2026-08-12T01:50:17.2062185Z 	at org.gradle.internal.execution.steps.SkipEmptyWorkStep.execute(SkipEmptyWorkStep.java:53)
+build	Build with Gradle	2026-08-12T01:50:17.2063732Z 	at org.gradle.internal.execution.steps.RemoveUntrackedExecutionStateStep.execute(RemoveUntrackedExecutionStateStep.java:32)
+build	Build with Gradle	2026-08-12T01:50:17.2065758Z 	at org.gradle.internal.execution.steps.RemoveUntrackedExecutionStateStep.execute(RemoveUntrackedExecutionStateStep.java:21)
+build	Build with Gradle	2026-08-12T01:50:17.2067616Z 	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
+build	Build with Gradle	2026-08-12T01:50:17.2069447Z 	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:36)
+build	Build with Gradle	2026-08-12T01:50:17.2071141Z 	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:23)
+build	Build with Gradle	2026-08-12T01:50:17.2072703Z 	at org.gradle.internal.execution.steps.CleanupStaleOutputsStep.execute(CleanupStaleOutputsStep.java:75)
+build	Build with Gradle	2026-08-12T01:50:17.2074106Z 	at org.gradle.internal.execution.steps.CleanupStaleOutputsStep.execute(CleanupStaleOutputsStep.java:41)
+build	Build with Gradle	2026-08-12T01:50:17.2113887Z 	at org.gradle.internal.execution.steps.AssignWorkspaceStep.lambda$execute$0(AssignWorkspaceStep.java:32)
+build	Build with Gradle	2026-08-12T01:50:17.2115511Z 	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:287)
+build	Build with Gradle	2026-08-12T01:50:17.2116882Z 	at org.gradle.internal.execution.steps.AssignWorkspaceStep.execute(AssignWorkspaceStep.java:30)
+build	Build with Gradle	2026-08-12T01:50:17.2118260Z 	at org.gradle.internal.execution.steps.AssignWorkspaceStep.execute(AssignWorkspaceStep.java:21)
+build	Build with Gradle	2026-08-12T01:50:17.2119546Z 	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:37)
+build	Build with Gradle	2026-08-12T01:50:17.2120823Z 	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:27)
+build	Build with Gradle	2026-08-12T01:50:17.2122030Z 	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:47)
+build	Build with Gradle	2026-08-12T01:50:17.2123143Z 	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:34)
+build	Build with Gradle	2026-08-12T01:50:17.2124416Z 	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:64)
+build	Build with Gradle	2026-08-12T01:50:17.2136437Z 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:146)
+build	Build with Gradle	2026-08-12T01:50:17.2138111Z 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:135)
+build	Build with Gradle	2026-08-12T01:50:17.2140006Z 	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+build	Build with Gradle	2026-08-12T01:50:17.2141751Z 	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+build	Build with Gradle	2026-08-12T01:50:17.2143479Z 	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+build	Build with Gradle	2026-08-12T01:50:17.2185430Z 	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+build	Build with Gradle	2026-08-12T01:50:17.2187024Z 	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+build	Build with Gradle	2026-08-12T01:50:17.2188563Z 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+build	Build with Gradle	2026-08-12T01:50:17.2190008Z 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+build	Build with Gradle	2026-08-12T01:50:17.2191412Z 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+build	Build with Gradle	2026-08-12T01:50:17.2193039Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+build	Build with Gradle	2026-08-12T01:50:17.2195193Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:199)
+build	Build with Gradle	2026-08-12T01:50:17.2197256Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+build	Build with Gradle	2026-08-12T01:50:17.2198806Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+build	Build with Gradle	2026-08-12T01:50:17.2200359Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:157)
+build	Build with Gradle	2026-08-12T01:50:17.2201917Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+build	Build with Gradle	2026-08-12T01:50:17.2203554Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+build	Build with Gradle	2026-08-12T01:50:17.2247758Z 	at org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:73)
+build	Build with Gradle	2026-08-12T01:50:17.2249405Z 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+build	Build with Gradle	2026-08-12T01:50:17.2250862Z 	at org.gradle.execution.plan.LocalTaskNodeExecutor.execute(LocalTaskNodeExecutor.java:42)
+build	Build with Gradle	2026-08-12T01:50:17.2252437Z 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:337)
+build	Build with Gradle	2026-08-12T01:50:17.2254350Z 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:324)
+build	Build with Gradle	2026-08-12T01:50:17.2256737Z 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:317)
+build	Build with Gradle	2026-08-12T01:50:17.2258760Z 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
+build	Build with Gradle	2026-08-12T01:50:17.2260443Z 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:463)
+build	Build with Gradle	2026-08-12T01:50:17.2261737Z 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:380)
+build	Build with Gradle	2026-08-12T01:50:17.2262966Z 	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:116)
+build	Build with Gradle	2026-08-12T01:50:17.2264496Z 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.executeWithServices(DefaultTaskExecutionGraph.java:138)
+build	Build with Gradle	2026-08-12T01:50:17.2306053Z 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.execute(DefaultTaskExecutionGraph.java:123)
+build	Build with Gradle	2026-08-12T01:50:17.2307493Z 	at org.gradle.execution.SelectedTaskExecutionAction.execute(SelectedTaskExecutionAction.java:35)
+build	Build with Gradle	2026-08-12T01:50:17.2308807Z 	at org.gradle.execution.DryRunBuildExecutionAction.execute(DryRunBuildExecutionAction.java:51)
+build	Build with Gradle	2026-08-12T01:50:17.2310647Z 	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:54)
+build	Build with Gradle	2026-08-12T01:50:17.2312500Z 	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:43)
+build	Build with Gradle	2026-08-12T01:50:17.2314394Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+build	Build with Gradle	2026-08-12T01:50:17.2316535Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:199)
+build	Build with Gradle	2026-08-12T01:50:17.2318204Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+build	Build with Gradle	2026-08-12T01:50:17.2319721Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+build	Build with Gradle	2026-08-12T01:50:17.2321185Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:157)
+build	Build with Gradle	2026-08-12T01:50:17.2322670Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+build	Build with Gradle	2026-08-12T01:50:17.2324131Z 	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+build	Build with Gradle	2026-08-12T01:50:17.2346544Z 	at org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:73)
+build	Build with Gradle	2026-08-12T01:50:17.2348307Z 	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor.execute(BuildOperationFiringBuildWorkerExecutor.java:40)
+build	Build with Gradle	2026-08-12T01:50:17.2350090Z 	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$10(DefaultBuildLifecycleController.java:202)
+build	Build with Gradle	2026-08-12T01:50:17.2351673Z 	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
+build	Build with Gradle	2026-08-12T01:50:17.2353179Z 	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$8(StateTransitionController.java:177)
+build	Build with Gradle	2026-08-12T01:50:17.2354506Z 	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:44)
+build	Build with Gradle	2026-08-12T01:50:17.2375689Z 	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:177)
+build	Build with Gradle	2026-08-12T01:50:17.2377268Z 	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:202)
+build	Build with Gradle	2026-08-12T01:50:17.2379022Z 	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:209)
+build	Build with Gradle	2026-08-12T01:50:17.2380611Z 	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:249)
+build	Build with Gradle	2026-08-12T01:50:17.2382051Z 	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:109)
+build	Build with Gradle	2026-08-12T01:50:17.2383535Z 	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:172)
+build	Build with Gradle	2026-08-12T01:50:17.2388029Z 	at org.gradle.composite.internal.DefaultBuildController.access$000(DefaultBuildController.java:47)
+build	Build with Gradle	2026-08-12T01:50:17.2389567Z 	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:191)
+build	Build with Gradle	2026-08-12T01:50:17.2391032Z 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+build	Build with Gradle	2026-08-12T01:50:17.2392379Z 	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:49)
+build	Build with Gradle	2026-08-12T01:50:17.2393080Z 
+build	Build with Gradle	2026-08-12T01:50:17.2393093Z 
+build	Build with Gradle	2026-08-12T01:50:17.2393317Z * Get more help at https://help.gradle.org
+build	Build with Gradle	2026-08-12T01:50:17.2393688Z 
+build	Build with Gradle	2026-08-12T01:50:17.2393837Z BUILD FAILED in 17s
+build	Build with Gradle	2026-08-12T01:50:17.2628489Z ##[error]Process completed with exit code 1.
+build	Post Setup Gradle	﻿2026-08-12T01:50:17.2812408Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build	Post Setup Gradle	2026-08-12T01:50:17.2813806Z Post job cleanup.
+build	Post Setup Gradle	2026-08-12T01:50:17.4727889Z In post-action step
+build	Post Setup Gradle	2026-08-12T01:50:17.4739091Z Cache is disabled: will not save state for later builds.
+build	Post Setup Gradle	2026-08-12T01:50:17.4740617Z (node:2349) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+build	Post Setup Gradle	2026-08-12T01:50:17.4742012Z (Use `node --trace-deprecation ...` to show where the warning was created)
+build	Post Setup Gradle	2026-08-12T01:50:17.4747478Z Generating Job Summary
+build	Post Setup Gradle	2026-08-12T01:50:17.4775414Z Completed post-action step
+build	Post set up JDK 17	﻿2026-08-12T01:50:17.5114773Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build	Post set up JDK 17	2026-08-12T01:50:17.5117147Z Post job cleanup.
+build	Post set up JDK 17	2026-08-12T01:50:17.6665668Z (node:2361) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+build	Post set up JDK 17	2026-08-12T01:50:17.6676319Z (Use `node --trace-deprecation ...` to show where the warning was created)
+build	Post Run actions/checkout@v4	﻿2026-08-12T01:50:17.7014068Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build	Post Run actions/checkout@v4	2026-08-12T01:50:17.7019607Z Post job cleanup.
+build	Post Run actions/checkout@v4	2026-08-12T01:50:17.8864216Z [command]/usr/bin/git version
+build	Post Run actions/checkout@v4	2026-08-12T01:50:17.8985129Z git version 2.54.0
+build	Post Run actions/checkout@v4	2026-08-12T01:50:17.9196136Z Temporarily overriding HOME='/home/runner/work/_temp/b370e62f-f0ae-42e1-b9b5-b1502f6b64de' before making global git config changes
+build	Post Run actions/checkout@v4	2026-08-12T01:50:17.9197535Z Adding repository directory to the temporary git global config as a safe directory
+build	Post Run actions/checkout@v4	2026-08-12T01:50:17.9199040Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/accounting-system-android/accounting-system-android
+build	Post Run actions/checkout@v4	2026-08-12T01:50:17.9307468Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	Post Run actions/checkout@v4	2026-08-12T01:50:17.9380040Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	Post Run actions/checkout@v4	2026-08-12T01:50:17.9763715Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	Post Run actions/checkout@v4	2026-08-12T01:50:17.9789686Z http.https://github.com/.extraheader
+build	Post Run actions/checkout@v4	2026-08-12T01:50:17.9801431Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+build	Post Run actions/checkout@v4	2026-08-12T01:50:17.9876226Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	Post Run actions/checkout@v4	2026-08-12T01:50:18.0205924Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build	Post Run actions/checkout@v4	2026-08-12T01:50:18.0228690Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build	Complete job	﻿2026-08-12T01:50:18.0827673Z Cleaning up orphan processes
+build	Complete job	2026-08-12T01:50:18.1113520Z Terminate orphan process: pid (2120) (java)
+build	Complete job	2026-08-12T01:50:18.1147799Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v4, gradle/actions/setup-gradle@v3. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
