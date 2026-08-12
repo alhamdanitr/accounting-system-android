@@ -32,6 +32,14 @@ data class Customer(
     val balance: Double = 0.0
 )
 
+data class Supplier(
+    val id: String,
+    val tenantId: String,
+    val name: String,
+    val phone: String?,
+    val balance: Double = 0.0
+)
+
 data class Sale(
     val id: String,
     val tenantId: String,

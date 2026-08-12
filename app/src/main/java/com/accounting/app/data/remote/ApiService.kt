@@ -12,6 +12,12 @@ interface ApiService {
 
     @POST("sync/push")
     suspend fun pushSyncOperations(@Body syncRequest: SyncPushRequest): SyncResponse
+
+    @GET("sales/customers/{tenantId}")
+    suspend fun getCustomers(@Path("tenantId") tenantId: String): List<Customer>
+
+    @GET("purchases/suppliers/{tenantId}")
+    suspend fun getSuppliers(@Path("tenantId") tenantId: String): List<Supplier>
 }
 
 data class SaleRequest(
