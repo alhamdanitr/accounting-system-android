@@ -20,118 +20,81 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun InventoryScreen() {
     var searchQuery by remember { mutableStateOf("") }
-    
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("إدارة المخازن والأصناف", fontWeight = FontWeight.Bold) },
-                actions = {
-                    IconButton(onClick = { }) {
-                        Icon(Icons.Default.FilterList, contentDescription = null)
-                    }
-                }
+                title = { Text("إدارة المخازن والأصناف (Inventory Ledger)", fontWeight = FontWeight.Bold, fontSize = 18.sp) },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface)
             )
-        },
-        floatingActionButton = {
-            FloatingActionButton(onClick = { }, containerColor = MaterialTheme.colorScheme.primary) {
-                Icon(Icons.Default.Add, contentDescription = null, tint = Color.White)
-            }
         }
     ) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
                 .padding(padding)
-                .padding(16.dp)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // شريط البحث والباركود
-            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                OutlinedTextField(
-                    value = searchQuery,
-                    onValueChange = { searchQuery = it },
-                    modifier = Modifier.weight(1f),
-                    placeholder = { Text("بحث باسم الصنف أو SKU...") },
-                    leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
-                    shape = RoundedCornerShape(12.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                IconButton(
-                    onClick = { },
-                    modifier = Modifier
-                        .size(56.dp)
-                        .background(MaterialTheme.colorScheme.primaryContainer, RoundedCornerShape(12.dp))
-                ) {
-                    Icon(Icons.Default.QrCodeScanner, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
-                }
-            }
-
-            Spacer(modifier = Modifier.height(24.dp))
-            
-            // ملخص المخزون السريع
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                InventorySummaryCard("إجمالي الأصناف", "154", Icons.Default.Category, Modifier.weight(1f))
-                InventorySummaryCard("قيمة المخزون", "45,000 $", Icons.Default.MonetizationOn, Modifier.weight(1f))
-            }
-
-            Spacer(modifier = Modifier.height(24.dp))
-            Text("قائمة الأصناف", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-            Spacer(modifier = Modifier.height(12.dp))
-
-            val items = listOf(
-                InventoryItem("1", "راوتر ميكروتيك RB951", "SKU001", 12.0, 5.0, "قطعة"),
-                InventoryItem("2", "كاميرا داهوا 4MP", "SKU002", 3.0, 10.0, "حبة"),
-                InventoryItem("3", "سويتش تي بي لينك 16 منفذ", "SKU003", 25.0, 5.0, "قطعة")
+            OutlinedTextField(
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = { Text("بحث برمز الصنف SKU أو الباركود أو الوصف...") },
+                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                shape = RoundedCornerShape(8.dp)
             )
 
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                items(items) { item ->
-                    InventoryCard(item)
+            // جدول بيانات الأصناف (Enterprise Table View)
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                shape = RoundedCornerShape(8.dp),
+                color = MaterialTheme.colorScheme.surface,
+                tonalElevation = 1.dp
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Row(modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(4.dp)).padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+                        Text("اسم الصنف", fontWeight = FontWeight.Bold, fontSize = 13.sp, modifier = Modifier.weight(2f))
+                        Text("الرمز (SKU)", fontWeight = FontWeight.Bold, fontSize = 13.sp, modifier = Modifier.weight(1.5f))
+                        Text("المخزون", fontWeight = FontWeight.Bold, fontSize = 13.sp, modifier = Modifier.weight(1f))
+                        Text("السعر", fontWeight = FontWeight.Bold, fontSize = 13.sp, modifier = Modifier.weight(1f))
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    val stockItems = listOf(
+                        StockRowItem("راوتر ميكروتيك RB951UiAS", "SKU-RB951", "14 قطعة", "55.00 $", false),
+                        StockRowItem("كاميرا مراقبة داهوا 4MP", "SKU-CAM4", "3 قطع", "35.00 $", true),
+                        StockRowItem("سويتش تي بي لينك 16 بورت", "SKU-SW16", "22 قطعة", "85.00 $", false),
+                        StockRowItem("كابل شبكة CAT6 (لفة 300م)", "SKU-CAT6", "8 لفات", "120.00 $", false)
+                    )
+
+                    LazyColumn(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        items(stockItems) { item ->
+                            StockTableRow(item)
+                        }
+                    }
                 }
             }
         }
     }
 }
 
-data class InventoryItem(val id: String, val name: String, val sku: String, val stock: Double, val minStock: Double, val unit: String)
+data class StockRowItem(val name: String, val sku: String, val stock: String, val price: String, val isLow: Boolean)
 
 @Composable
-fun InventorySummaryCard(title: String, value: String, icon: androidx.compose.ui.graphics.vector.ImageVector, modifier: Modifier) {
-    Card(modifier = modifier, shape = RoundedCornerShape(12.dp)) {
-        Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(24.dp))
-            Spacer(modifier = Modifier.width(12.dp))
-            Column {
-                Text(title, fontSize = 12.sp, color = Color.Gray)
-                Text(value, fontSize = 16.sp, fontWeight = FontWeight.Bold)
-            }
-        }
-    }
-}
-
-@Composable
-fun InventoryCard(item: InventoryItem) {
-    val isLowStock = item.stock <= item.minStock
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        shape = RoundedCornerShape(12.dp)
+fun StockTableRow(item: StockRowItem) {
+    Surface(
+        shape = RoundedCornerShape(4.dp),
+        color = if (item.isLow) MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.2f) else Color.Transparent,
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(item.name, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                Text("SKU: ${item.sku}", fontSize = 12.sp, color = Color.Gray)
-            }
-            Column(horizontalAlignment = Alignment.End) {
-                Text(
-                    "${item.stock} ${item.unit}", 
-                    fontWeight = FontWeight.Bold, 
-                    fontSize = 18.sp, 
-                    color = if (isLowStock) Color(0xFFD32F2F) else MaterialTheme.colorScheme.primary
-                )
-                if (isLowStock) {
-                    Text("مخزون منخفض!", fontSize = 10.sp, color = Color(0xFFD32F2F), fontWeight = FontWeight.Bold)
-                }
-            }
+        Row(modifier = Modifier.padding(vertical = 10.dp, horizontal = 8.dp).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+            Text(item.name, fontSize = 13.sp, fontWeight = FontWeight.Medium, modifier = Modifier.weight(2f))
+            Text(item.sku, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1.5f))
+            Text(item.stock, fontSize = 13.sp, fontWeight = FontWeight.Bold, color = if (item.isLow) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface, modifier = Modifier.weight(1f))
+            Text(item.price, fontSize = 13.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary, modifier = Modifier.weight(1f))
         }
     }
 }

@@ -24,43 +24,55 @@ fun DashboardScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("لوحة التحكم الذكية", fontWeight = FontWeight.Bold) },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+                title = { Text("لوحة المؤشرات التنفيذية (Executive Dashboard)", fontWeight = FontWeight.Bold, fontSize = 18.sp) },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface)
             )
         }
     ) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
                 .padding(padding)
-                .padding(16.dp)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // ملخص الأداء المالي العلوي
+            // البطاقة المالية الكبرى (Hero Financial Card)
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary),
-                shape = RoundedCornerShape(16.dp)
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                shape = RoundedCornerShape(12.dp)
             ) {
-                Column(modifier = Modifier.padding(24.dp)) {
-                    Text("إجمالي مبيعات الشهر", color = Color.White.copy(alpha = 0.8f), fontSize = 14.sp)
-                    Text("12,450.00 $", color = Color.White, fontSize = 32.sp, fontWeight = FontWeight.Bold)
+                Column(modifier = Modifier.padding(20.dp)) {
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                        Text("صافي الإيرادات اليومية", fontSize = 14.sp, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                        Surface(
+                            shape = RoundedCornerShape(4.dp),
+                            color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.2f)
+                        ) {
+                            Text("مباشر (Live)", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.secondary, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text("3,450.00 $", fontSize = 32.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onPrimaryContainer)
                     Spacer(modifier = Modifier.height(8.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.TrendingUp, contentDescription = null, tint = Color.Green, modifier = Modifier.size(16.dp))
-                        Text(" +15% زيادة عن الشهر الماضي", color = Color.White.copy(alpha = 0.9f), fontSize = 12.sp)
+                    Divider(color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.1f))
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                        Text("عدد الفواتير: 32 فاتورة", fontSize = 12.sp, color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f))
+                        Text("متوسط السلة: 107.8 $", fontSize = 12.sp, color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f))
                     }
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
-            Text("المؤشرات الرئيسية", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-            Spacer(modifier = Modifier.height(12.dp))
+            // شبكة المؤشرات المؤسسية
+            Text("مؤشرات الأداء الرئيسية (KPIs)", fontWeight = FontWeight.Bold, fontSize = 16.sp)
 
-            val stats = listOf(
-                StatItem("فواتير اليوم", "24", Icons.Default.Receipt, MaterialTheme.colorScheme.secondary),
-                StatItem("صافي الربح", "3,120 $", Icons.Default.Payments, Color(0xFF2E7D32)),
-                StatItem("أصناف منخفضة", "5", Icons.Default.Inventory, Color(0xFFD32F2F)),
-                StatItem("العملاء الجدد", "12", Icons.Default.GroupAdd, Color(0xFF0288D1))
+            val kpis = listOf(
+                EnterpriseKpi("إجمالي المبيعات", "18,400 $", Icons.Default.TrendingUp, MaterialTheme.colorScheme.primary),
+                EnterpriseKpi("إجمالي المصروفات", "1,200 $", Icons.Default.MoneyOff, MaterialTheme.colorScheme.error),
+                EnterpriseKpi("أصناف منخفضة المخزون", "4 أصناف", Icons.Default.Warning, Color(0xFFD97706)),
+                EnterpriseKpi("أرصدة العملاء (مديونيات)", "2,150 $", Icons.Default.AccountBalance, Color(0xFF7C3AED))
             )
 
             LazyVerticalGrid(
@@ -69,35 +81,30 @@ fun DashboardScreen() {
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 modifier = Modifier.fillMaxSize()
             ) {
-                items(stats) { stat ->
-                    StatCard(stat)
+                items(kpis) { kpi ->
+                    KpiCard(kpi)
                 }
             }
         }
     }
 }
 
-data class StatItem(val title: String, val value: String, val icon: ImageVector, val color: Color)
+data class EnterpriseKpi(val title: String, val value: String, val icon: ImageVector, val accentColor: Color)
 
 @Composable
-fun StatCard(stat: StatItem) {
+fun KpiCard(kpi: EnterpriseKpi) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        shape = RoundedCornerShape(12.dp)
+        modifier = Modifier.fillMaxWidth().height(110.dp),
+        shape = RoundedCornerShape(10.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Box(
-                modifier = Modifier
-                    .size(40.dp)
-                    .background(stat.color.copy(alpha = 0.1f), RoundedCornerShape(8.dp)),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(stat.icon, contentDescription = null, tint = stat.color)
+        Column(modifier = Modifier.padding(14.dp).fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                Text(kpi.title, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Icon(kpi.icon, contentDescription = null, tint = kpi.accentColor, modifier = Modifier.size(18.dp))
             }
-            Spacer(modifier = Modifier.height(12.dp))
-            Text(stat.title, fontSize = 14.sp, color = Color.Gray)
-            Text(stat.value, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Text(kpi.value, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
         }
     }
 }
