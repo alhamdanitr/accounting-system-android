@@ -1,114 +1,125 @@
 package com.accounting.app.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.accounting.app.ui.components.*
+import com.accounting.app.ui.theme.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StockTransferScreen() {
-    var sourceWarehouse by remember { mutableStateOf("المستودع الرئيسي (الفرع الأساسي)") }
-    var targetWarehouse by remember { mutableStateOf("مستودع المعرض (فرع المبيعات)") }
+    var sourceWarehouse by remember { mutableStateOf("المستودع الرئيسي") }
+    var targetWarehouse by remember { mutableStateOf("مستودع المعرض") }
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("تحويل المخزون والتسوية (Stock Transfer & Adjustment)", fontWeight = FontWeight.Bold, fontSize = 18.sp) },
-                colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = MaterialTheme.colorScheme.surface)
+            CenterAlignedTopAppBar(
+                title = { Text("تحويل المخزون والتسوية", style = MaterialTheme.typography.titleLarge) },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
-        }
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { /* TODO: عملية تحويل جديدة */ },
+                containerColor = MaterialTheme.colorScheme.primary
+            ) {
+                Icon(Icons.Default.SwapHoriz, contentDescription = "تحويل جديد", tint = MaterialTheme.colorScheme.onPrimary)
+            }
+        },
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
                 .padding(padding)
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(horizontal = Spacing.screenPadding),
+            verticalArrangement = Arrangement.spacedBy(Spacing.xl)
         ) {
-            // بطاقة اختيار المستودعات
+            Spacer(Modifier.height(Spacing.xs))
+            
+            // بطاقة مسار التحويل
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(10.dp),
+                shape = MaterialTheme.shapes.medium,
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+                elevation = CardDefaults.cardElevation(defaultElevation = Spacing.xs / 4)
             ) {
-                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Text("مسار التحويل بين المستودعات", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = MaterialTheme.colorScheme.primary)
+                Column(modifier = Modifier.padding(Spacing.lg), verticalArrangement = Arrangement.spacedBy(Spacing.md)) {
+                    Text("مسار التحويل الحالي", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                         Column(modifier = Modifier.weight(1f)) {
-                            Text("من مستودع:", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                            Text(sourceWarehouse, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                            Text("من مستودع", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(sourceWarehouse, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
                         }
-                        Icon(Icons.Default.ArrowForward, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
                         Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.End) {
-                            Text("إلى مستودع:", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                            Text(targetWarehouse, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                            Text("إلى مستودع", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(targetWarehouse, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
                         }
                     }
                 }
             }
 
-            Text("سجل عمليات التحويل والمرتجعات الأخيرة", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            Column(verticalArrangement = Arrangement.spacedBy(Spacing.md)) {
+                SectionHeader(title = "سجل العمليات الأخيرة", action = "تصفية")
 
-            val transfers = listOf(
-                TransferItem("TRF-1002", "راوتر ميكروتيك RB951", "5 قطع", "مكتمل", "12/08/2026"),
-                TransferItem("TRF-1001", "سويتش تي بي لينك 24 بورت", "2 قطعة", "مكتمل", "10/08/2026"),
-                TransferItem("ADJ-504", "كاميرا داهوا (مرتجع مبيعات)", "1 قطعة", "قيد المراجعة", "09/08/2026")
-            )
+                val transfers = listOf(
+                    TransferItem("TRF-1002", "راوتر ميكروتيك RB951", "5 قطع", StatusTone.POSITIVE, "12/08/2026"),
+                    TransferItem("TRF-1001", "سويتش تي بي لينك 24 بورت", "2 قطعة", StatusTone.POSITIVE, "10/08/2026"),
+                    TransferItem("ADJ-504", "كاميرا داهوا (مرتجع)", "1 قطعة", StatusTone.WARNING, "09/08/2026")
+                )
 
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                shape = RoundedCornerShape(8.dp),
-                color = MaterialTheme.colorScheme.surface,
-                tonalElevation = 1.dp
-            ) {
-                LazyColumn(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                LazyColumn(verticalArrangement = Arrangement.spacedBy(Spacing.sm), modifier = Modifier.weight(1f)) {
                     items(transfers) { transfer ->
                         TransferRow(transfer)
                     }
+                    item { Spacer(Modifier.height(Spacing.xxl)) }
                 }
             }
         }
     }
 }
 
-data class TransferItem(val code: String, val itemName: String, val quantity: String, val status: String, val date: String)
+data class TransferItem(val code: String, val itemName: String, val quantity: String, val tone: StatusTone, val date: String)
 
 @Composable
 fun TransferRow(item: TransferItem) {
-    Surface(
-        shape = RoundedCornerShape(6.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.2f),
-        modifier = Modifier.fillMaxWidth()
+    Card(
+        modifier = Modifier.fillMaxWidth().clickable { },
+        shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = Spacing.xs / 4)
     ) {
-        Row(modifier = Modifier.padding(12.dp).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier.padding(Spacing.lg).fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Column(modifier = Modifier.weight(1.5f)) {
-                Text(item.code, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = MaterialTheme.colorScheme.primary)
-                Text(item.itemName, fontSize = 12.sp, fontWeight = FontWeight.Medium)
+                Text(item.code, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                Text(item.itemName, style = MaterialTheme.typography.bodyMedium, maxLines = 1)
+                Text(item.date, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            Column(modifier = Modifier.weight(1f)) {
-                Text(item.quantity, fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                Text(item.date, fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
-            Surface(
-                shape = RoundedCornerShape(4.dp),
-                color = if (item.status == "مكتمل") MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.errorContainer
-            ) {
-                Text(item.status, fontSize = 11.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp))
+            Column(horizontalAlignment = Alignment.End) {
+                Text(item.quantity, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                Spacer(Modifier.height(4.dp))
+                StatusBadge(
+                    text = if (item.tone == StatusTone.POSITIVE) "مكتمل" else "قيد المعالجة",
+                    tone = item.tone
+                )
             }
         }
     }

@@ -8,48 +8,50 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.accounting.app.ui.components.*
+import com.accounting.app.ui.theme.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReportsScreen() {
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("التقارير المالية والضريبية (Financial & Tax Reports)", fontWeight = FontWeight.Bold, fontSize = 18.sp) },
-                colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = MaterialTheme.colorScheme.surface)
+            CenterAlignedTopAppBar(
+                title = { Text("التقارير والتحليلات", style = MaterialTheme.typography.titleLarge) },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
-        }
+        },
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
                 .padding(padding)
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(horizontal = Spacing.screenPadding),
+            verticalArrangement = Arrangement.spacedBy(Spacing.xl)
         ) {
-            Text("التقارير المتاحة للتصدير الفوري (PDF / Excel)", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            Spacer(Modifier.height(Spacing.xs))
+            
+            SectionHeader(title = "التقارير الجاهزة للتصدير", action = "PDF / Excel")
 
             val reports = listOf(
-                ReportCategory("قائمة الدخل والأرباح والخسائر", "تقرير شامل للمبيعات والمصروفات وصافي الأرباح", Icons.Default.Assessment, "PDF / Excel"),
-                ReportCategory("ميزان المراجعة والأستاذ العام", "أرصدة الحسابات والأصول والخصوم والذمم", Icons.Default.AccountBalance, "PDF / Excel"),
-                ReportCategory("حركة المخزون والأصناف الراكدة", "كميات بضائع الشبكات ومعدات ميكروتيك المتاحة", Icons.Default.Inventory, "Excel"),
-                ReportCategory("تقرير مبيعات نقاط البيع (POS)", "تفاصيل الفواتير اليومية وطرق الدفع والضرائب", Icons.Default.Receipt, "PDF / Excel")
+                ReportCategory("قائمة الدخل والأرباح", "تحليل شامل للمبيعات والمصروفات وصافي الربح", Icons.Default.Assessment, "PDF"),
+                ReportCategory("ميزان المراجعة", "أرصدة كافة الحسابات المدينة والدائنة", Icons.Default.AccountBalance, "Excel"),
+                ReportCategory("حركة المخزون", "تقرير دوران الأصناف والكميات المتاحة", Icons.Default.Inventory, "Excel"),
+                ReportCategory("إقرار ضريبة القيمة المضافة", "تفاصيل الضريبة المحصلة والمدفوعة للفترة", Icons.Default.ReceiptLong, "PDF")
             )
 
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(Spacing.md), modifier = Modifier.weight(1f)) {
                 items(reports) { report ->
                     ReportCard(report)
                 }
+                item { Spacer(Modifier.height(Spacing.xxl)) }
             }
         }
     }
@@ -61,40 +63,36 @@ data class ReportCategory(val title: String, val description: String, val icon: 
 fun ReportCard(report: ReportCategory) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(10.dp),
+        shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = Spacing.xs / 4)
     ) {
         Row(
-            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+            modifier = Modifier.padding(Spacing.lg).fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(horizontalArrangement = Arrangement.spacedBy(16.dp), verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(Spacing.md), verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
                 Surface(
-                    shape = RoundedCornerShape(8.dp),
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    modifier = Modifier.size(42.dp)
+                    shape = RoundedCornerShape(Spacing.md),
+                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f),
+                    modifier = Modifier.size(48.dp)
                 ) {
                     Box(contentAlignment = Alignment.Center) {
-                        Icon(report.icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Icon(report.icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(24.dp))
                     }
                 }
                 Column {
-                    Text(report.title, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    Text(report.title, style = MaterialTheme.typography.titleSmall)
                     Spacer(modifier = Modifier.height(2.dp))
-                    Text(report.description, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(report.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
-            Button(
-                onClick = { /* Export action */ },
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer, contentColor = MaterialTheme.colorScheme.onSecondaryContainer),
-                shape = RoundedCornerShape(6.dp),
-                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+            IconButton(
+                onClick = { /* TODO: تصدير التقرير */ },
+                colors = IconButtonDefaults.iconButtonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer, contentColor = MaterialTheme.colorScheme.onSecondaryContainer)
             ) {
-                Icon(Icons.Default.Download, contentDescription = null, modifier = Modifier.size(16.dp))
-                Spacer(modifier = Modifier.width(4.dp))
-                Text(report.format, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                Icon(Icons.Default.FileDownload, contentDescription = "تنزيل", modifier = Modifier.size(20.dp))
             }
         }
     }

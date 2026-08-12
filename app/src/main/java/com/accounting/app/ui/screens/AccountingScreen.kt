@@ -1,75 +1,83 @@
 package com.accounting.app.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ChevronLeft
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.accounting.app.ui.components.*
+import com.accounting.app.ui.theme.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AccountingScreen() {
+    // TODO: جلب البيانات الحقيقية من ApiService (accounting/accounts)
+    // حالياً نستخدم بيانات تجريبية بنفس هيكلية الـ ERP الجديدة
+    
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("المحاسبة ودفتر الأستاذ (General Ledger)", fontWeight = FontWeight.Bold, fontSize = 18.sp) },
-                colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = MaterialTheme.colorScheme.surface)
+            CenterAlignedTopAppBar(
+                title = { Text("المحاسبة ودفتر الأستاذ", style = MaterialTheme.typography.titleLarge) },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
-        }
+        },
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
                 .padding(padding)
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(horizontal = Spacing.screenPadding),
+            verticalArrangement = Arrangement.spacedBy(Spacing.xl)
         ) {
-            // ملخص ميزان المراجعة
+            Spacer(Modifier.height(Spacing.xs))
+            
+            // بطاقة الأصول الإجمالية
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(10.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+                shape = MaterialTheme.shapes.medium,
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
             ) {
-                Row(modifier = Modifier.padding(20.dp).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    modifier = Modifier.padding(Spacing.lg).fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Column {
-                        Text("إجمالي الأصول النقدية والبنكية", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Text("24,850.00 $", fontSize = 26.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                        Text("إجمالي الأصول النقدية", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                        Text("24,850.00 $", style = MaterialTheme.typography.headlineMedium, color = MaterialTheme.colorScheme.onPrimaryContainer, fontWeight = FontWeight.Bold)
                     }
-                    Icon(Icons.Default.AccountBalance, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(36.dp))
+                    Surface(shape = RoundedCornerShape(Spacing.md), color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.1f), modifier = Modifier.size(48.dp)) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Icon(Icons.Default.AccountBalance, contentDescription = null, tint = MaterialTheme.colorScheme.onPrimaryContainer)
+                        }
+                    }
                 }
             }
 
-            Text("حسابات الأستاذ العام", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            Column(verticalArrangement = Arrangement.spacedBy(Spacing.md)) {
+                SectionHeader(title = "شجرة الحسابات الرئيسية", action = "عرض الكل")
+                
+                val ledgerAccounts = listOf(
+                    LedgerAccount("الصندوق الرئيسي (النقدية)", "نقدية", "8,450.00 $", StatusTone.POSITIVE),
+                    LedgerAccount("حساب البنك التجاري", "بنك", "12,400.00 $", StatusTone.POSITIVE),
+                    LedgerAccount("ذمم العملاء المدينة", "أصول متداولة", "4,100.00 $", StatusTone.INFO),
+                    LedgerAccount("حساب الموردين", "خصوم متداولة", "-2,500.00 $", StatusTone.NEGATIVE),
+                    LedgerAccount("مصروفات التشغيل", "مصروفات", "1,200.00 $", StatusTone.WARNING)
+                )
 
-            val ledgerAccounts = listOf(
-                LedgerAccount("الصندوق الرئيسي (النقدية)", "صندوق فرعي", "8,450.00 $", true),
-                LedgerAccount("حساب البنك التجاري", "بنك", "12,400.00 $", true),
-                LedgerAccount("مديونيات العملاء (الذمم)", "أصول متداولة", "4,100.00 $", true),
-                LedgerAccount("حساب الموردين والمشتريات", "خصوم متداولة", "-2,500.00 $", false),
-                LedgerAccount("مصروفات التشغيل والرواتب", "مصروفات", "1,200.00 $", false)
-            )
-
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                shape = RoundedCornerShape(8.dp),
-                color = MaterialTheme.colorScheme.surface,
-                tonalElevation = 1.dp
-            ) {
-                LazyColumn(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                LazyColumn(verticalArrangement = Arrangement.spacedBy(Spacing.sm), modifier = Modifier.weight(1f)) {
                     items(ledgerAccounts) { acc ->
                         LedgerRow(acc)
                     }
@@ -79,21 +87,30 @@ fun AccountingScreen() {
     }
 }
 
-data class LedgerAccount(val name: String, val category: String, val balance: String, val isPositive: Boolean)
+data class LedgerAccount(val name: String, val category: String, val balance: String, val tone: StatusTone)
 
 @Composable
 fun LedgerRow(acc: LedgerAccount) {
-    Surface(
-        shape = RoundedCornerShape(6.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-        modifier = Modifier.fillMaxWidth()
+    Card(
+        modifier = Modifier.fillMaxWidth().clickable { },
+        shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = Spacing.xs / 4)
     ) {
-        Row(modifier = Modifier.padding(12.dp).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-            Column {
-                Text(acc.name, fontWeight = FontWeight.Bold, fontSize = 14.sp)
-                Text(acc.category, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Row(
+            modifier = Modifier.padding(Spacing.lg).fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(acc.name, style = MaterialTheme.typography.titleSmall)
+                Text(acc.category, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            Text(acc.balance, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = if (acc.isPositive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(acc.balance, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                Spacer(Modifier.width(Spacing.sm))
+                Icon(Icons.AutoMirrored.Filled.ChevronLeft, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(16.dp))
+            }
         }
     }
 }
