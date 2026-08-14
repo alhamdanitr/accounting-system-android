@@ -6,6 +6,7 @@ import com.accounting.app.data.auth.SessionStore
 import com.accounting.app.data.local.AppDatabase
 import com.accounting.app.data.local.entity.CustomerEntity
 import com.accounting.app.data.local.entity.ProductEntity
+import com.accounting.app.data.local.entity.RemoteSyncChangeEntity
 import com.accounting.app.data.local.entity.SyncOperationEntity
 import com.accounting.app.data.remote.NetworkModule
 import com.accounting.app.data.remote.SyncOperationDto
@@ -78,7 +79,7 @@ class SyncManager(context: Context) {
         do {
             val response = NetworkModule.apiService.pullSyncOperations(tenantId, deviceId, cursor, 100)
             if (!response.success) return false
-            response.operations.forEach { operation -> applyRemoteOperation(operation.entityType, operation.payload) }
+            response.operations.forEach { operation -> applyRemoteOperation(operation) }
             if (response.operations.isNotEmpty()) {
                 cursor = response.nextCursor
                 sessionStore.updateSyncCursor(cursor)
@@ -87,12 +88,37 @@ class SyncManager(context: Context) {
         return true
     }
 
-    private suspend fun applyRemoteOperation(entityType: String, payload: String) {
-        when (entityType.uppercase()) {
-            "PRODUCT" -> database.productDao().insertProducts(listOf(gson.fromJson(payload, ProductEntity::class.java)))
-            "CUSTOMER" -> database.customerDao().insertCustomer(gson.fromJson(payload, CustomerEntity::class.java))
-            else -> Log.i(TAG, "Remote operation deferred for unsupported entity: $entityType")
+    private suspend fun applyRemoteOperation(operation: com.accounting.app.data.remote.RemoteSyncOperation) {
+        try {
+            when (operation.entityType.uppercase()) {
+                "PRODUCT" -> database.productDao().insertProducts(listOf(gson.fromJson(operation.payload, ProductEntity::class.java)))
+                "CUSTOMER" -> database.customerDao().insertCustomer(gson.fromJson(operation.payload, CustomerEntity::class.java))
+                "SALE", "PURCHASE" -> persistRemoteChange(operation, null)
+                else -> persistRemoteChange(operation, "Unsupported remote entity")
+            }
+        } catch (error: Exception) {
+            persistRemoteChange(operation, error.message ?: "Remote operation could not be applied")
         }
+    }
+
+    private suspend fun persistRemoteChange(
+        operation: com.accounting.app.data.remote.RemoteSyncOperation,
+        errorMessage: String?,
+    ) {
+        database.remoteChangeDao().insert(
+            RemoteSyncChangeEntity(
+                id = operation.id,
+                sequence = operation.sequence,
+                tenantId = operation.tenantId,
+                deviceId = operation.deviceId,
+                entityType = operation.entityType,
+                entityId = operation.entityId,
+                operationType = operation.operationType,
+                payload = operation.payload,
+                status = if (errorMessage == null) "PENDING" else "CONFLICT",
+                errorMessage = errorMessage,
+            ),
+        )
     }
 
     private fun backoffMillis(attempt: Int): Long {

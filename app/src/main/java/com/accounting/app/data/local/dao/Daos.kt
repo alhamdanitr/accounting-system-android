@@ -35,6 +35,18 @@ interface SaleDao {
 }
 
 @Dao
+interface RemoteChangeDao {
+    @Query("SELECT * FROM sync_remote_changes WHERE tenantId = :tenantId AND status = 'PENDING' ORDER BY sequence ASC")
+    fun getPendingChanges(tenantId: String): Flow<List<RemoteSyncChangeEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(change: RemoteSyncChangeEntity)
+
+    @Query("UPDATE sync_remote_changes SET status = :status, errorMessage = :errorMessage WHERE id = :id")
+    suspend fun updateStatus(id: String, status: String, errorMessage: String? = null)
+}
+
+@Dao
 interface SyncDao {
     @Query("SELECT * FROM sync_operations WHERE tenantId = :tenantId AND deviceId = :deviceId AND status IN ('PENDING', 'FAILED') AND nextAttemptAt <= :now ORDER BY createdAt ASC LIMIT :limit")
     suspend fun getPendingOperations(tenantId: String, deviceId: String, now: Long, limit: Int = 100): List<SyncOperationEntity>
