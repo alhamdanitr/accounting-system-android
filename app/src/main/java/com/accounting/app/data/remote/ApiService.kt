@@ -19,6 +19,9 @@ interface ApiService {
     @POST("sales")
     suspend fun createSale(@Body saleRequest: SaleRequest): Sale
 
+    @GET("inventory/warehouses/{tenantId}")
+    suspend fun getWarehouses(@Path("tenantId") tenantId: String): List<WarehouseResponse>
+
     @POST("sync/push")
     suspend fun pushSyncOperations(@Body syncRequest: SyncPushRequest): SyncResponse
 
@@ -64,6 +67,7 @@ data class AuthResponse(
 data class DeviceResponse(val id: String, val name: String, val platform: String)
 data class AuthUserResponse(val id: String, val fullName: String, val email: String?, val tenantId: String, val branchId: String?)
 data class SimpleResponse(val success: Boolean)
+data class WarehouseResponse(val id: String, val name: String, val code: String)
 
 data class SaleRequest(
     val tenantId: String,

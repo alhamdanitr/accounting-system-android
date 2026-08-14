@@ -14,16 +14,22 @@ import androidx.compose.material.icons.automirrored.filled.ListAlt
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.accounting.app.data.SyncManager
+import com.accounting.app.data.local.entity.SyncOperationEntity
 import com.accounting.app.data.remote.NetworkModule
+import com.google.gson.Gson
+import java.util.UUID
 import com.accounting.app.domain.model.Product
 import com.accounting.app.ui.components.*
 import com.accounting.app.ui.theme.Spacing
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
@@ -49,7 +55,13 @@ import kotlinx.coroutines.withContext
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun POSScreen() {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val syncManager = remember(context) { SyncManager(context) }
     var products by remember { mutableStateOf<List<Product>>(emptyList()) }
+    var warehouseId by remember { mutableStateOf<String?>(null) }
+    var isSubmitting by remember { mutableStateOf(false) }
+    var checkoutMessage by remember { mutableStateOf<String?>(null) }
     var isLoading by remember { mutableStateOf(true) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     var cartItems by remember { mutableStateOf(listOf<Pair<Product, Int>>()) }
@@ -65,7 +77,12 @@ fun POSScreen() {
             val fetched = withContext(Dispatchers.IO) {
                 NetworkModule.apiService.getProducts(tenantId)
             }
+            val warehouses = withContext(Dispatchers.IO) {
+                NetworkModule.apiService.getWarehouses(tenantId)
+            }
             products = fetched
+            warehouseId = warehouses.firstOrNull()?.id
+
             errorMessage = null
         } catch (e: Exception) {
             errorMessage = "خطأ في الاتصال بالخادم: ${e.localizedMessage}"
@@ -115,9 +132,48 @@ fun POSScreen() {
     }
 
     fun checkout() {
-        cartItems = emptyList()
-        showCartSheet = false
-        // TODO: استدعاء API إنشاء عملية بيع + طباعة الفاتورة
+        val tenantId = NetworkModule.sessionStore.tenantId ?: return
+        val deviceId = NetworkModule.sessionStore.deviceId ?: return
+        val selectedWarehouseId = warehouseId
+        if (selectedWarehouseId.isNullOrBlank() || cartItems.isEmpty() || isSubmitting) {
+            checkoutMessage = "لا يوجد مستودع نشط أو أن السلة فارغة"
+            return
+        }
+        val saleId = UUID.randomUUID().toString()
+        val payload = Gson().toJson(
+            mapOf(
+                "warehouseId" to selectedWarehouseId,
+                "branchId" to NetworkModule.sessionStore.branchId,
+                "userId" to NetworkModule.sessionStore.userId,
+                "paymentType" to "CASH",
+                "paidAmount" to grandTotal,
+                "items" to cartItems.map { (product, quantity) ->
+                    mapOf("productId" to product.id, "quantity" to quantity.toDouble(), "unitPrice" to product.salePrice.toDouble(), "discount" to 0.0)
+                },
+            ),
+        )
+        isSubmitting = true
+        scope.launch {
+            try {
+                syncManager.queueOperation(
+                    SyncOperationEntity(
+                        idempotencyKey = "sale:$saleId",
+                        tenantId = tenantId,
+                        deviceId = deviceId,
+                        entityType = "SALE",
+                        entityId = saleId,
+                        operationType = "CREATE",
+                        payload = payload,
+                    ),
+                )
+                syncManager.performSync()
+                cartItems = emptyList()
+                showCartSheet = false
+                checkoutMessage = "تم حفظ الفاتورة محليًا وستتم مزامنتها تلقائيًا"
+            } finally {
+                isSubmitting = false
+            }
+        }
     }
 
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
@@ -198,6 +254,13 @@ fun POSScreen() {
                     }
                 }
             }
+        }
+        checkoutMessage?.let { message ->
+            Snackbar(
+                modifier = Modifier.align(Alignment.BottomCenter).padding(Spacing.md),
+                actionOnNewLine = false,
+                action = { TextButton(onClick = { checkoutMessage = null }) { Text("إغلاق") } },
+            ) { Text(message) }
         }
     }
 }
