@@ -19,6 +19,13 @@ interface ApiService {
     @GET("accounting/accounts/{tenantId}")
     suspend fun getAccounts(@Path("tenantId") tenantId: String): List<AccountResponse>
 
+    @GET("reports/sales/daily/{tenantId}")
+    suspend fun getDailySalesReport(
+        @Path("tenantId") tenantId: String,
+        @Query("warehouseId") warehouseId: String,
+        @Query("date") date: String,
+    ): DailySalesReportResponse
+
     @POST("sales")
     suspend fun createSale(@Body saleRequest: SaleRequest): Sale
 
@@ -71,6 +78,30 @@ data class DeviceResponse(val id: String, val name: String, val platform: String
 data class AuthUserResponse(val id: String, val fullName: String, val email: String?, val tenantId: String, val branchId: String?)
 data class SimpleResponse(val success: Boolean)
 data class WarehouseResponse(val id: String, val name: String, val code: String)
+data class DailySalesReportResponse(
+    val date: String,
+    val warehouse: WarehouseResponse,
+    val summary: DailySalesSummaryResponse,
+    val sales: List<DailySaleResponse>,
+)
+data class DailySalesSummaryResponse(
+    val count: Int,
+    val totalRevenue: Double,
+    val totalPaid: Double,
+    val totalDue: Double,
+)
+data class DailySaleResponse(
+    val id: String,
+    val invoiceNumber: String,
+    val createdAt: String,
+    val grandTotal: Double,
+    val paidAmount: Double,
+    val dueAmount: Double,
+    val paymentType: String,
+    val customer: DailySalesCustomerResponse?,
+)
+data class DailySalesCustomerResponse(val name: String)
+
 data class AccountResponse(
     val id: String,
     val tenantId: String,
