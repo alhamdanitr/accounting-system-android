@@ -16,6 +16,9 @@ interface ApiService {
     @GET("products/{tenantId}")
     suspend fun getProducts(@Path("tenantId") tenantId: String): List<Product>
 
+    @GET("accounting/accounts/{tenantId}")
+    suspend fun getAccounts(@Path("tenantId") tenantId: String): List<AccountResponse>
+
     @POST("sales")
     suspend fun createSale(@Body saleRequest: SaleRequest): Sale
 
@@ -68,6 +71,14 @@ data class DeviceResponse(val id: String, val name: String, val platform: String
 data class AuthUserResponse(val id: String, val fullName: String, val email: String?, val tenantId: String, val branchId: String?)
 data class SimpleResponse(val success: Boolean)
 data class WarehouseResponse(val id: String, val name: String, val code: String)
+data class AccountResponse(
+    val id: String,
+    val tenantId: String,
+    val code: String,
+    val name: String,
+    val type: String,
+    val parentId: String?,
+)
 
 data class SaleRequest(
     val tenantId: String,
