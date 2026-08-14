@@ -2,6 +2,7 @@ package com.accounting.app.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -180,5 +181,5 @@ private fun RecentInvoicesList() {
 @Composable
 private fun Modifier.verticalScrollFix(): Modifier {
     val scrollState = androidx.compose.foundation.rememberScrollState()
-    return this.then(androidx.compose.foundation.verticalScroll(scrollState))
+    return this.verticalScroll(scrollState)
 }

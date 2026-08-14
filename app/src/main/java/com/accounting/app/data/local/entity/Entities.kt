@@ -45,11 +45,16 @@ data class SaleEntity(
 
 @Entity(tableName = "sync_operations")
 data class SyncOperationEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val idempotencyKey: String,
+    @PrimaryKey val idempotencyKey: String,
+    val tenantId: String,
+    val deviceId: String,
     val entityType: String,
     val entityId: String,
     val operationType: String,
     val payload: String,
-    val createdAt: Long = System.currentTimeMillis()
+    val status: String = "PENDING",
+    val attempts: Int = 0,
+    val lastError: String? = null,
+    val nextAttemptAt: Long = 0L,
+    val createdAt: Long = System.currentTimeMillis(),
 )

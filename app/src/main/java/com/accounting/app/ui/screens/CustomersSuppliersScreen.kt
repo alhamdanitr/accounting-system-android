@@ -6,7 +6,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.automirrored.filled.ChevronLeft
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -15,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.accounting.app.data.remote.NetworkModule
-import com.accounting.app.data.settings.AppConfig
 import com.accounting.app.domain.model.Customer
 import com.accounting.app.domain.model.Supplier
 import com.accounting.app.ui.components.*
@@ -47,11 +45,13 @@ fun CustomersSuppliersScreen() {
     LaunchedEffect(Unit) {
         try {
             isLoading = true
+            val tenantId = NetworkModule.sessionStore.tenantId
+                ?: error("لا توجد جلسة مصادق عليها")
             val customers = withContext(Dispatchers.IO) {
-                NetworkModule.apiService.getCustomers(AppConfig.DEFAULT_TENANT_ID)
+                NetworkModule.apiService.getCustomers(tenantId)
             }
             val suppliers = withContext(Dispatchers.IO) {
-                NetworkModule.apiService.getSuppliers(AppConfig.DEFAULT_TENANT_ID)
+                NetworkModule.apiService.getSuppliers(tenantId)
             }
             
             allAccounts = customers.map { AccountEntry(it.id, it.name, it.phone, it.balance, AccountKind.CUSTOMER) } +
@@ -145,7 +145,8 @@ fun CustomersSuppliersScreen() {
                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
                         shape = MaterialTheme.shapes.medium
                     ) {
-                        Text(errorMessage!!, color = MaterialTheme.colorScheme.onErrorContainer, modifier = Modifier.padding(Spacing.lg))
+                        val message = errorMessage.orEmpty()
+                        Text(message, color = MaterialTheme.colorScheme.onErrorContainer, modifier = Modifier.padding(Spacing.lg))
                     }
                     filtered.isEmpty() -> EmptyState(
                         icon = if (selectedTab == AccountKind.CUSTOMER) Icons.Default.People else Icons.Default.LocalShipping,
@@ -220,7 +221,7 @@ private fun AccountRow(entry: AccountEntry, onClick: () -> Unit) {
                 StatusBadge(statusText, tone)
             }
             Spacer(Modifier.width(Spacing.xs))
-            Icon(Icons.AutoMirrored.Filled.ChevronLeft, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+            Icon(Icons.Default.ChevronLeft, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }

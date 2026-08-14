@@ -1,5 +1,6 @@
 package com.accounting.app.ui.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -141,13 +142,9 @@ fun MainScreen() {
 // دالة صغيرة مساعدة لتفادي تكرار استيراد clickable + interactionSource في كل مكان
 @Composable
 private fun Modifier.clickableSafely(onClick: () -> Unit): Modifier {
-    return this.then(
-        Modifier.let {
-            androidx.compose.foundation.clickable(
-                interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() },
-                indication = null,
-                onClick = onClick
-            )
-        }
+    return this.clickable(
+        interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() },
+        indication = null,
+        onClick = onClick,
     )
 }

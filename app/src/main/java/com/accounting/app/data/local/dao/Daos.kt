@@ -36,12 +36,15 @@ interface SaleDao {
 
 @Dao
 interface SyncDao {
-    @Query("SELECT * FROM sync_operations ORDER BY createdAt ASC")
-    suspend fun getPendingOperations(): List<SyncOperationEntity>
+    @Query("SELECT * FROM sync_operations WHERE tenantId = :tenantId AND deviceId = :deviceId AND status IN ('PENDING', 'FAILED') AND nextAttemptAt <= :now ORDER BY createdAt ASC LIMIT :limit")
+    suspend fun getPendingOperations(tenantId: String, deviceId: String, now: Long, limit: Int = 100): List<SyncOperationEntity>
 
-    @Delete
-    suspend fun deleteOperation(operation: SyncOperationEntity)
+    @Query("UPDATE sync_operations SET status = :status, attempts = :attempts, lastError = :lastError, nextAttemptAt = :nextAttemptAt WHERE idempotencyKey = :idempotencyKey")
+    suspend fun updateState(idempotencyKey: String, status: String, attempts: Int, lastError: String?, nextAttemptAt: Long)
 
-    @Insert
+    @Query("DELETE FROM sync_operations WHERE idempotencyKey IN (:idempotencyKeys)")
+    suspend fun deleteAcknowledged(idempotencyKeys: List<String>)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertOperation(operation: SyncOperationEntity)
 }

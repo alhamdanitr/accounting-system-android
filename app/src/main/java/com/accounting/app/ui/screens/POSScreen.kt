@@ -20,7 +20,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.accounting.app.data.remote.NetworkModule
-import com.accounting.app.data.settings.AppConfig
 import com.accounting.app.domain.model.Product
 import com.accounting.app.ui.components.*
 import com.accounting.app.ui.theme.Spacing
@@ -61,8 +60,10 @@ fun POSScreen() {
     LaunchedEffect(Unit) {
         try {
             isLoading = true
+            val tenantId = NetworkModule.sessionStore.tenantId
+                ?: error("لا توجد جلسة مصادق عليها")
             val fetched = withContext(Dispatchers.IO) {
-                NetworkModule.apiService.getProducts(AppConfig.DEFAULT_TENANT_ID)
+                NetworkModule.apiService.getProducts(tenantId)
             }
             products = fetched
             errorMessage = null

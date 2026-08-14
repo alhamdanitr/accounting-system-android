@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.automirrored.filled.ChevronLeft
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -16,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.accounting.app.data.remote.NetworkModule
-import com.accounting.app.data.settings.AppConfig
 import com.accounting.app.domain.model.Product
 import com.accounting.app.ui.components.*
 import com.accounting.app.ui.theme.Spacing
@@ -60,8 +58,10 @@ fun InventoryScreen() {
     LaunchedEffect(Unit) {
         try {
             isLoading = true
+            val tenantId = NetworkModule.sessionStore.tenantId
+                ?: error("لا توجد جلسة مصادق عليها")
             products = withContext(Dispatchers.IO) {
-                NetworkModule.apiService.getProducts(AppConfig.DEFAULT_TENANT_ID)
+                NetworkModule.apiService.getProducts(tenantId)
             }
             errorMessage = null
         } catch (e: Exception) {
@@ -142,7 +142,7 @@ fun InventoryScreen() {
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
                     shape = MaterialTheme.shapes.medium
                 ) {
-                    Text(errorMessage, color = MaterialTheme.colorScheme.onErrorContainer, modifier = Modifier.padding(Spacing.lg))
+                    Text(errorMessage.orEmpty(), color = MaterialTheme.colorScheme.onErrorContainer, modifier = Modifier.padding(Spacing.lg))
                 }
                 isLoading -> Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     CircularProgressIndicator()
@@ -224,7 +224,7 @@ private fun ProductRow(product: Product, onClick: () -> Unit) {
                     else -> Text("${product.currentStock.toInt()} بالمخزون", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
-            Icon(Icons.AutoMirrored.Filled.ChevronLeft, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+            Icon(Icons.Default.ChevronLeft, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
